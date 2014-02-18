@@ -54,9 +54,6 @@ public class TitleScreen extends Activity {
 				eventDetails.put("address", event_address.getText().toString());
 				eventDetails.put("event_time", event_time.getText().toString());
 				
-				ParseObject testObject = new ParseObject("TestObject");
-				testObject.put("foo", "bar");
-				testObject.saveInBackground();
 				eventDetails.saveInBackground();
 
 			}
