@@ -50,16 +50,6 @@
         android:text="@string/poc_address" />
 
     <EditText
-        android:id="@+id/editaddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
-        android:ems="10"
-        android:inputType="textPostalAddress" />
-
-    <EditText
         android:id="@+id/editname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,5 +60,15 @@
 
         <requestFocus />
     </EditText>
+
+    <EditText
+        android:id="@+id/editaddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="29dp"
+        android:ems="10"
+        android:inputType="textPostalAddress" />
 
 </RelativeLayout>
