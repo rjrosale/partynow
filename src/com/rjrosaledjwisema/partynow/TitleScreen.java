@@ -12,6 +12,7 @@ import com.parse.ParseAnalytics;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -59,19 +60,30 @@ public class TitleScreen extends Activity {
 	private void initButtonListener() {
 		database_send.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
+				Intent local;
 				String datestr = "" + datepicker.getMonth() + "/" + datepicker.getDayOfMonth() + "/" + datepicker.getYear();
+				String addr;
+				
 				ParseObject eventDetails = new ParseObject("EventDetails");
 				eventDetails.put("event_name", event_name.getText().toString());
 				eventDetails.put("event_address", event_address.getText().toString());
 				eventDetails.put("event_hour", ((Integer)(timepicker.getCurrentHour())).intValue());
 				eventDetails.put("event_minute", ((Integer)(timepicker.getCurrentMinute())).intValue());
 				eventDetails.put("event_date", datestr);
+				
 				if (public_rb.isChecked())
 					eventDetails.put("pub_priv", true);
 				else
 					eventDetails.put("pub_priv", false);
 				eventDetails.saveInBackground();
-				Toast.makeText(getBaseContext(), "Uploaded to database!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getBaseContext(), "Uploaded to database!", Toast.LENGTH_SHORT).show(); 
+				
+				addr = event_address.getText().toString();
+				if(!addr.isEmpty()) {
+					local = new Intent(TitleScreen.this, MapActivity.class);
+					local.putExtra("name", addr);
+					TitleScreen.this.startActivity(local);
+				}
 			}
 		});
 	}
