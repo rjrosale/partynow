@@ -72,7 +72,7 @@ public class MapActivity extends FragmentActivity {
 	 private void getShaKey() {
 
 		 try {
-		 PackageInfo info = getPackageManager().getPackageInfo("your.package.name",
+		 PackageInfo info = getPackageManager().getPackageInfo("com.rjrosaledjwisema.partynow",
 		 PackageManager.GET_SIGNATURES);
 		 for (Signature signature : info.signatures) {
 		 MessageDigest md = MessageDigest.getInstance("SHA");
