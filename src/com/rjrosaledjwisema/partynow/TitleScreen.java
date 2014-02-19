@@ -1,5 +1,10 @@
 package com.rjrosaledjwisema.partynow;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseAnalytics;
@@ -7,19 +12,27 @@ import com.parse.ParseAnalytics;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class TitleScreen extends Activity {
 
-	private RelativeLayout layout;
-	private EditText event_name, event_address, event_time;
+	private EditText event_name, event_address;
 	private Button database_send;
+	private RadioButton public_rb, private_rb;
+	DatePicker datepicker;
+	TimePicker timepicker;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +41,11 @@ public class TitleScreen extends Activity {
 		Parse.initialize(this, "q4gB8a9Fr30V0T0Rq7Cak26YpSEJeGnD4ShknpGn", "Su7l9n816K3fI1hILnErpWjOBwxfWSUAC7XRvpnZ");
 		event_name = (EditText)findViewById(R.id.editname);
 		event_address = (EditText)findViewById(R.id.editaddress);
-		event_time = (EditText)findViewById(R.id.edittime);
 		database_send = (Button)findViewById(R.id.send_database_button);
+		public_rb = (RadioButton)findViewById(R.id.publicrb);
+		private_rb = (RadioButton)findViewById(R.id.privaterb);
+		datepicker = (DatePicker)findViewById(R.id.datePicker1);
+		timepicker = (TimePicker)findViewById(R.id.timePicker1);
 		initButtonListener();
 	}
 
@@ -43,19 +59,19 @@ public class TitleScreen extends Activity {
 	private void initButtonListener() {
 		database_send.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
-				//Implement code to add a new joke here...
-//				String s = m_vwJokeEditText.getText().toString();
-//				if (s != null && !s.isEmpty())
-//					addJoke(new Joke(s, m_strAuthorName));
-//				m_vwJokeEditText.setText("");
-				
+				String datestr = "" + datepicker.getMonth() + "/" + datepicker.getDayOfMonth() + "/" + datepicker.getYear();
 				ParseObject eventDetails = new ParseObject("EventDetails");
 				eventDetails.put("event_name", event_name.getText().toString());
-				eventDetails.put("address", event_address.getText().toString());
-				eventDetails.put("event_time", event_time.getText().toString());
-				
+				eventDetails.put("event_address", event_address.getText().toString());
+				eventDetails.put("event_hour", ((Integer)(timepicker.getCurrentHour())).intValue());
+				eventDetails.put("event_minute", ((Integer)(timepicker.getCurrentMinute())).intValue());
+				eventDetails.put("event_date", datestr);
+				if (public_rb.isChecked())
+					eventDetails.put("pub_priv", true);
+				else
+					eventDetails.put("pub_priv", false);
 				eventDetails.saveInBackground();
-
+				Toast.makeText(getBaseContext(), "Uploaded to database!", Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

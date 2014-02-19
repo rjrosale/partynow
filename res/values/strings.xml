@@ -7,6 +7,9 @@
     <string name="poc_eventname">Name of Event</string>
     <string name="poc_address">Address of Event</string>
     <string name="poc_time">Time</string>
+    <string name="poc_date">Date</string>
     <string name="poc_button">Send to Database!</string>
+    <string name="poc_truerb">Public</string>
+    <string name="poc_falserb">Private</string>
 
 </resources>
