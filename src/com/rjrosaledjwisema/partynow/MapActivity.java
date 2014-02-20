@@ -16,6 +16,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.FindCallback;
 import com.parse.Parse;
@@ -42,7 +43,10 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 public class MapActivity extends FragmentActivity 
 implements OnMyLocationChangeListener {
@@ -53,6 +57,7 @@ implements OnMyLocationChangeListener {
 	private ListView listLayout;
 	private EventListAdapter eventAdapter;
 	private ArrayList<Event> listEvents = new ArrayList<Event>();
+	private Marker marker;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +93,7 @@ implements OnMyLocationChangeListener {
 		        		listEvents.add(event);
 		        		eventAdapter.notifyDataSetChanged();
 		        	}
+		        	initLayoutListener();
 		        } else {
 		            Log.d("score", "Error: " + e.getMessage());
 		        }
@@ -96,7 +102,36 @@ implements OnMyLocationChangeListener {
 		});
 		setUpMapIfNeeded();
 	}
+	
+	private void initLayoutListener() {
+		listLayout.setOnItemClickListener(new ListView.OnItemClickListener() {
+		    // Called when the user long-clicks on someView
 
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				String newAddr = listEvents.get(arg2).getAddress();
+				Geocoder geocoder = new Geocoder(MapActivity.this); 
+				try {
+					List<Address> addr = geocoder.getFromLocationName(newAddr, 1);
+					if(addr.size() > 0) {
+			    	    double latitude = addr.get(0).getLatitude();
+			    	    double longitude = addr.get(0).getLongitude();
+			    	    
+			    	    marker.remove();
+			    	    marker = mMap.addMarker(new MarkerOptions()
+			            .position(new LatLng(latitude, longitude))
+			            .title("Your Event!"));
+			    	}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		});
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -135,8 +170,7 @@ implements OnMyLocationChangeListener {
     	if(addresses.size() > 0) {
     	    double latitude = addresses.get(0).getLatitude();
     	    double longitude = addresses.get(0).getLongitude();
-    	    
-    	    mMap.addMarker(new MarkerOptions()
+    	    marker = mMap.addMarker(new MarkerOptions()
             .position(new LatLng(latitude, longitude))
             .title("Your Event!"));
     	}
