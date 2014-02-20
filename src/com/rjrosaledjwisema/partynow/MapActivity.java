@@ -3,6 +3,7 @@ package com.rjrosaledjwisema.partynow;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -41,6 +42,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.ListView;
 
 public class MapActivity extends FragmentActivity 
 implements OnMyLocationChangeListener {
@@ -48,15 +50,22 @@ implements OnMyLocationChangeListener {
 	private GoogleMap mMap;
 	private LatLng myLocation;
 	private String address = null;
+	private ListView listLayout;
+	private EventListAdapter eventAdapter;
+	private ArrayList<Event> listEvents = new ArrayList<Event>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		eventAdapter = new EventListAdapter(this, listEvents);
 		initLayout();
 	}
 	
 	protected void initLayout() {
 		setContentView(R.layout.activity_map);
+		
+		listLayout = (ListView) findViewById(R.id.eventListViewGroup);
+		listLayout.setAdapter(eventAdapter);
 		
 		Bundle intentbundle = this.getIntent().getExtras();
 		if(intentbundle != null) {
@@ -75,8 +84,9 @@ implements OnMyLocationChangeListener {
 		        		String event_date = obj.getString("event_date");
 		        		String event_time = "" + obj.getInt("event_hour") + ":" + obj.getInt("event_minute");
 		        		Event event = new Event(event_name, event_address, event_time, event_date);
-		        		EventView view = new EventView(MapActivity.this, event);
 		        		// Make these work with the listview!
+		        		listEvents.add(event);
+		        		eventAdapter.notifyDataSetChanged();
 		        	}
 		        } else {
 		            Log.d("score", "Error: " + e.getMessage());
