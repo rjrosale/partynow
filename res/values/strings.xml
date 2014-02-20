@@ -11,5 +11,6 @@
     <string name="poc_button">Send to Database!</string>
     <string name="poc_truerb">Public</string>
     <string name="poc_falserb">Private</string>
+    <string name="title_activity_main">MainActivity</string>
 
 </resources>

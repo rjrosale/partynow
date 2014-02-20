@@ -39,7 +39,7 @@ public class TitleScreen extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_title_screen);
-		Parse.initialize(this, "q4gB8a9Fr30V0T0Rq7Cak26YpSEJeGnD4ShknpGn", "Su7l9n816K3fI1hILnErpWjOBwxfWSUAC7XRvpnZ");
+		
 		event_name = (EditText)findViewById(R.id.editname);
 		event_address = (EditText)findViewById(R.id.editaddress);
 		database_send = (Button)findViewById(R.id.send_database_button);
@@ -78,14 +78,14 @@ public class TitleScreen extends Activity {
 				eventDetails.saveInBackground();
 				Toast.makeText(getBaseContext(), "Uploaded to database!", Toast.LENGTH_SHORT).show(); 
 				
-				addr = event_address.getText().toString();
-				name = event_name.getText().toString();
-				if(!addr.isEmpty()) {
-					local = new Intent(TitleScreen.this, MapActivity.class);
-					local.putExtra("address", addr);
-					local.putExtra("name", name);
-					TitleScreen.this.startActivity(local);
-				}
+//				addr = event_address.getText().toString();
+//				name = event_name.getText().toString();
+//				if(!addr.isEmpty()) {
+//					local = new Intent(TitleScreen.this, MapActivity.class);
+//					local.putExtra("address", addr);
+//					local.putExtra("name", name);
+//					TitleScreen.this.startActivity(local);
+//				}
 			}
 		});
 	}

@@ -72,15 +72,15 @@ implements OnMyLocationChangeListener {
 		listLayout = (ListView) findViewById(R.id.eventListViewGroup);
 		listLayout.setAdapter(eventAdapter);
 		
-		Bundle intentbundle = this.getIntent().getExtras();
-		if(intentbundle != null) {
-			String addr = intentbundle.getString("address");
-			String name = intentbundle.getString("name");
-			if(addr != null && name != null) {
-				this.address = addr;
-				this.name = name;
-			}
-		}
+//		Bundle intentbundle = this.getIntent().getExtras();
+//		if(intentbundle != null) {
+//			String addr = intentbundle.getString("address");
+//			String name = intentbundle.getString("name");
+//			if(addr != null && name != null) {
+//				this.address = addr;
+//				this.name = name;
+//			}
+//		}
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("EventDetails");
 		query.findInBackground(new FindCallback<ParseObject>() {
 		    public void done(List<ParseObject> objects, ParseException e) {
@@ -122,7 +122,8 @@ implements OnMyLocationChangeListener {
 			    	    double latitude = addr.get(0).getLatitude();
 			    	    double longitude = addr.get(0).getLongitude();
 			    	    
-			    	    marker.remove();
+			    	    if (marker != null)
+			    	    	marker.remove();
 			    	    marker = mMap.addMarker(new MarkerOptions()
 			            .position(new LatLng(latitude, longitude))
 			            .title(newName));
@@ -159,29 +160,28 @@ implements OnMyLocationChangeListener {
 	        	mMap.getUiSettings().setMyLocationButtonEnabled(true);
 	        	mMap.setMyLocationEnabled(true);
 	        	mMap.setOnMyLocationChangeListener(this);
-	            pinEventAddress();
 	        }
 	    }
 	}
 	
-	private void pinEventAddress() {
-		Geocoder geocoder = new Geocoder(this); 
-    	List<Address> addresses = null;
-    	
-    	try {
-			addresses = geocoder.getFromLocationName(this.address, 1);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	if(addresses.size() > 0) {
-    	    double latitude = addresses.get(0).getLatitude();
-    	    double longitude = addresses.get(0).getLongitude();
-    	    marker = mMap.addMarker(new MarkerOptions()
-            .position(new LatLng(latitude, longitude))
-            .title(name));
-    	}
-	}
+//	private void pinEventAddress() {
+//		Geocoder geocoder = new Geocoder(this); 
+//    	List<Address> addresses = null;
+//    	
+//    	try {
+//			addresses = geocoder.getFromLocationName(this.address, 1);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//    	if(addresses.size() > 0) {
+//    	    double latitude = addresses.get(0).getLatitude();
+//    	    double longitude = addresses.get(0).getLongitude();
+//    	    marker = mMap.addMarker(new MarkerOptions()
+//            .position(new LatLng(latitude, longitude))
+//            .title(name));
+//    	}
+//	}
 	
 	@Override
 	public void onMyLocationChange(Location location) {
