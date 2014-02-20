@@ -40,13 +40,13 @@ public class TitleScreen extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_title_screen);
 		
-		event_name = (EditText)findViewById(R.id.editname);
-		event_address = (EditText)findViewById(R.id.editaddress);
-		database_send = (Button)findViewById(R.id.send_database_button);
-		public_rb = (RadioButton)findViewById(R.id.publicrb);
-		private_rb = (RadioButton)findViewById(R.id.privaterb);
-		datepicker = (DatePicker)findViewById(R.id.datePicker1);
-		timepicker = (TimePicker)findViewById(R.id.timePicker1);
+		event_name = (EditText) findViewById(R.id.editname);
+		event_address = (EditText) findViewById(R.id.editaddress);
+		database_send = (Button) findViewById(R.id.send_database_button);
+		public_rb = (RadioButton) findViewById(R.id.publicrb);
+		private_rb = (RadioButton) findViewById(R.id.privaterb);
+		datepicker = (DatePicker) findViewById(R.id.datePicker1);
+		timepicker = (TimePicker) findViewById(R.id.timePicker1);
 		initButtonListener();
 	}
 
@@ -64,20 +64,25 @@ public class TitleScreen extends Activity {
 				String datestr = "" + datepicker.getMonth() + "/" + datepicker.getDayOfMonth() + "/" + datepicker.getYear();
 				String addr, name;
 				
-				ParseObject eventDetails = new ParseObject("EventDetails");
-				eventDetails.put("event_name", event_name.getText().toString());
-				eventDetails.put("event_address", event_address.getText().toString());
-				eventDetails.put("event_hour", ((Integer)(timepicker.getCurrentHour())).intValue());
-				eventDetails.put("event_minute", ((Integer)(timepicker.getCurrentMinute())).intValue());
-				eventDetails.put("event_date", datestr);
-				
-				if (public_rb.isChecked())
-					eventDetails.put("pub_priv", true);
-				else
-					eventDetails.put("pub_priv", false);
-				eventDetails.saveInBackground();
-				Toast.makeText(getBaseContext(), "Uploaded to database!", Toast.LENGTH_SHORT).show(); 
-				
+				if (!event_name.getText().toString().isEmpty() && !event_address.getText().toString().isEmpty()
+						&& (public_rb.isChecked() || private_rb.isChecked())) {
+					ParseObject eventDetails = new ParseObject("EventDetails");
+					eventDetails.put("event_name", event_name.getText().toString());
+					eventDetails.put("event_address", event_address.getText().toString());
+					eventDetails.put("event_hour", ((Integer)(timepicker.getCurrentHour())).intValue());
+					eventDetails.put("event_minute", ((Integer)(timepicker.getCurrentMinute())).intValue());
+					eventDetails.put("event_date", datestr);
+					
+					if (public_rb.isChecked())
+						eventDetails.put("pub_priv", true);
+					else
+						eventDetails.put("pub_priv", false);
+					eventDetails.saveInBackground();
+					
+					Toast.makeText(getBaseContext(), "Uploaded to database!", Toast.LENGTH_SHORT).show(); 
+				} else {
+					Toast.makeText(getBaseContext(), "Fill in all fields!!", Toast.LENGTH_SHORT).show(); 
+				}
 //				addr = event_address.getText().toString();
 //				name = event_name.getText().toString();
 //				if(!addr.isEmpty()) {
