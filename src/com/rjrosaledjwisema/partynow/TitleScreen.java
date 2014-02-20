@@ -62,7 +62,7 @@ public class TitleScreen extends Activity {
 			public void onClick(View view) {
 				Intent local;
 				String datestr = "" + datepicker.getMonth() + "/" + datepicker.getDayOfMonth() + "/" + datepicker.getYear();
-				String addr;
+				String addr, name;
 				
 				ParseObject eventDetails = new ParseObject("EventDetails");
 				eventDetails.put("event_name", event_name.getText().toString());
@@ -79,9 +79,11 @@ public class TitleScreen extends Activity {
 				Toast.makeText(getBaseContext(), "Uploaded to database!", Toast.LENGTH_SHORT).show(); 
 				
 				addr = event_address.getText().toString();
+				name = event_name.getText().toString();
 				if(!addr.isEmpty()) {
 					local = new Intent(TitleScreen.this, MapActivity.class);
 					local.putExtra("address", addr);
+					local.putExtra("name", name);
 					TitleScreen.this.startActivity(local);
 				}
 			}

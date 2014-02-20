@@ -53,7 +53,7 @@ implements OnMyLocationChangeListener {
 
 	private GoogleMap mMap;
 	private LatLng myLocation;
-	private String address = null;
+	private String address = null, name = null;
 	private ListView listLayout;
 	private EventListAdapter eventAdapter;
 	private ArrayList<Event> listEvents = new ArrayList<Event>();
@@ -75,8 +75,10 @@ implements OnMyLocationChangeListener {
 		Bundle intentbundle = this.getIntent().getExtras();
 		if(intentbundle != null) {
 			String addr = intentbundle.getString("address");
-			if(addr != null) {
+			String name = intentbundle.getString("name");
+			if(addr != null && name != null) {
 				this.address = addr;
+				this.name = name;
 			}
 		}
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("EventDetails");
@@ -112,6 +114,7 @@ implements OnMyLocationChangeListener {
 					int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				String newAddr = listEvents.get(arg2).getAddress();
+				String newName = listEvents.get(arg2).getName();
 				Geocoder geocoder = new Geocoder(MapActivity.this); 
 				try {
 					List<Address> addr = geocoder.getFromLocationName(newAddr, 1);
@@ -122,7 +125,11 @@ implements OnMyLocationChangeListener {
 			    	    marker.remove();
 			    	    marker = mMap.addMarker(new MarkerOptions()
 			            .position(new LatLng(latitude, longitude))
-			            .title("Your Event!"));
+			            .title(newName));
+			       	    CameraUpdate myLoc = CameraUpdateFactory.newCameraPosition(
+			    	            new CameraPosition.Builder().target(new LatLng(latitude,
+			    	                   longitude)).zoom(7).build());
+			    	    mMap.moveCamera(myLoc);
 			    	}
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -172,7 +179,7 @@ implements OnMyLocationChangeListener {
     	    double longitude = addresses.get(0).getLongitude();
     	    marker = mMap.addMarker(new MarkerOptions()
             .position(new LatLng(latitude, longitude))
-            .title("Your Event!"));
+            .title(name));
     	}
 	}
 	
