@@ -47,10 +47,6 @@ public class TitleScreen extends Activity {
 		private_rb = (RadioButton)findViewById(R.id.privaterb);
 		datepicker = (DatePicker)findViewById(R.id.datePicker1);
 		timepicker = (TimePicker)findViewById(R.id.timePicker1);
-		
-		event_name.setText("");
-		event_address.setText("");
-		
 		initButtonListener();
 	}
 
@@ -66,29 +62,27 @@ public class TitleScreen extends Activity {
 			public void onClick(View view) {
 				Intent local;
 				String datestr = "" + datepicker.getMonth() + "/" + datepicker.getDayOfMonth() + "/" + datepicker.getYear();
+				String addr;
 				
-				if (event_name.getText().toString() != "" && event_address.getText().toString() != "") {
-					ParseObject eventDetails = new ParseObject("EventDetails");
-					eventDetails.put("event_name", event_name.getText().toString());
-					eventDetails.put("event_address", event_address.getText().toString());
-					eventDetails.put("event_hour", ((Integer)(timepicker.getCurrentHour())).intValue());
-					eventDetails.put("event_minute", ((Integer)(timepicker.getCurrentMinute())).intValue());
-					eventDetails.put("event_date", datestr);
-
-					if (public_rb.isChecked())
-						eventDetails.put("pub_priv", true);
-					else
-						eventDetails.put("pub_priv", false);
-					
-					eventDetails.saveInBackground();
-					Toast.makeText(getBaseContext(), "Uploaded to database!", Toast.LENGTH_SHORT).show(); 
-					
+				ParseObject eventDetails = new ParseObject("EventDetails");
+				eventDetails.put("event_name", event_name.getText().toString());
+				eventDetails.put("event_address", event_address.getText().toString());
+				eventDetails.put("event_hour", ((Integer)(timepicker.getCurrentHour())).intValue());
+				eventDetails.put("event_minute", ((Integer)(timepicker.getCurrentMinute())).intValue());
+				eventDetails.put("event_date", datestr);
+				
+				if (public_rb.isChecked())
+					eventDetails.put("pub_priv", true);
+				else
+					eventDetails.put("pub_priv", false);
+				eventDetails.saveInBackground();
+				Toast.makeText(getBaseContext(), "Uploaded to database!", Toast.LENGTH_SHORT).show(); 
+				
+				addr = event_address.getText().toString();
+				if(!addr.isEmpty()) {
 					local = new Intent(TitleScreen.this, MapActivity.class);
-					local.putExtra("address", event_address.getText().toString());
+					local.putExtra("address", addr);
 					TitleScreen.this.startActivity(local);
-					
-				} else {
-					Toast.makeText(getBaseContext(), "Fill in blank text fields!", Toast.LENGTH_SHORT).show(); 
 				}
 			}
 		});

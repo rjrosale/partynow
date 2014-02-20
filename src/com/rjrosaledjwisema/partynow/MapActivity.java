@@ -57,7 +57,7 @@ implements OnMyLocationChangeListener {
 		
 		Bundle intentbundle = this.getIntent().getExtras();
 		if(intentbundle != null) {
-			String addr = intentbundle.getString("addr");
+			String addr = intentbundle.getString("address");
 			if(addr != null) {
 				this.address = addr;
 			}

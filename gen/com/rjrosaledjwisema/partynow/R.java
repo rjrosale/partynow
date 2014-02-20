@@ -1147,7 +1147,7 @@ containing a value of this type.
         public static final int abs__textButton=0x7f050017;
         public static final int abs__title=0x7f05001f;
         public static final int abs__up=0x7f05000f;
-        public static final int action_settings=0x7f050042;
+        public static final int action_settings=0x7f050043;
         public static final int datePicker1=0x7f050040;
         public static final int disableHome=0x7f05000d;
         public static final int edit_query=0x7f05002a;
@@ -1155,6 +1155,7 @@ containing a value of this type.
         public static final int editname=0x7f05003d;
         public static final int homeAsUp=0x7f05000a;
         public static final int hybrid=0x7f050004;
+        public static final int jokeListViewGroup=0x7f050042;
         public static final int listMode=0x7f050006;
         public static final int map=0x7f050036;
         public static final int none=0x7f050000;
@@ -1204,8 +1205,10 @@ containing a value of this type.
         public static final int abs__simple_dropdown_hint=0x7f030014;
         public static final int activity_map=0x7f030015;
         public static final int activity_title_screen=0x7f030016;
-        public static final int sherlock_spinner_dropdown_item=0x7f030017;
-        public static final int sherlock_spinner_item=0x7f030018;
+        public static final int event_list=0x7f030017;
+        public static final int event_view=0x7f030018;
+        public static final int sherlock_spinner_dropdown_item=0x7f030019;
+        public static final int sherlock_spinner_item=0x7f03001a;
     }
     public static final class menu {
         public static final int map_screen=0x7f0b0000;
