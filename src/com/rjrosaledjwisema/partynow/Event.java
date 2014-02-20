@@ -4,11 +4,13 @@ public class Event {
 	private String eventName;
 	private String eventAddress;
 	private String eventTime;
+	private String eventDate;
 	
-	public Event(String eventName, String eventAddress, String eventTime) {
+	public Event(String eventName, String eventAddress, String eventTime, String eventDate) {
 		this.eventName = eventName;
 		this.eventAddress = eventAddress;
 		this.eventTime = eventTime;
+		this.eventDate = eventDate;
 	}
 	
 	public String getName() {
@@ -33,5 +35,13 @@ public class Event {
 	
 	public void setTime(String time) {
 		this.eventTime = time;
+	}
+	
+	public String getDate() {
+		return this.eventDate;
+	}
+	
+	public void setDate(String date) {
+		this.eventDate = date;
 	}
 }

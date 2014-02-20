@@ -16,8 +16,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.parse.FindCallback;
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import android.location.Address;
 import android.location.Geocoder;
@@ -62,7 +65,25 @@ implements OnMyLocationChangeListener {
 				this.address = addr;
 			}
 		}
-		
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("EventDetails");
+		query.findInBackground(new FindCallback<ParseObject>() {
+		    public void done(List<ParseObject> objects, ParseException e) {
+		        if (e == null) {
+		        	for (ParseObject obj : objects) {
+		        		String event_name = obj.getString("event_name");
+		        		String event_address = obj.getString("event_address");
+		        		String event_date = obj.getString("event_date");
+		        		String event_time = "" + obj.getInt("event_hour") + ":" + obj.getInt("event_minute");
+		        		Event event = new Event(event_name, event_address, event_time, event_date);
+		        		EventView view = new EventView(MapActivity.this, event);
+		        		// Make these work with the listview!
+		        	}
+		        } else {
+		            Log.d("score", "Error: " + e.getMessage());
+		        }
+		    }
+
+		});
 		setUpMapIfNeeded();
 	}
 

@@ -1147,12 +1147,16 @@ containing a value of this type.
         public static final int abs__textButton=0x7f050017;
         public static final int abs__title=0x7f05001f;
         public static final int abs__up=0x7f05000f;
-        public static final int action_settings=0x7f050043;
+        public static final int action_settings=0x7f050047;
         public static final int datePicker1=0x7f050040;
         public static final int disableHome=0x7f05000d;
         public static final int edit_query=0x7f05002a;
         public static final int editaddress=0x7f050039;
         public static final int editname=0x7f05003d;
+        public static final int eventAddressText=0x7f050044;
+        public static final int eventDateText=0x7f050045;
+        public static final int eventNameText=0x7f050043;
+        public static final int eventTimeText=0x7f050046;
         public static final int homeAsUp=0x7f05000a;
         public static final int hybrid=0x7f050004;
         public static final int jokeListViewGroup=0x7f050042;
