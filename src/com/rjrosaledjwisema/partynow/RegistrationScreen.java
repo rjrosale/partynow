@@ -12,6 +12,6 @@ public class RegistrationScreen extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.registration_screen);
 		
-
+		
 	}
 }
