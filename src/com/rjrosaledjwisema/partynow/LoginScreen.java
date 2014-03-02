@@ -2,7 +2,9 @@ package com.rjrosaledjwisema.partynow;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import com.actionbarsherlock.view.MenuInflater;
+
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.parse.LogInCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
@@ -24,7 +27,8 @@ public class LoginScreen extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login_screen);
-
+		Parse.initialize(this, "q4gB8a9Fr30V0T0Rq7Cak26YpSEJeGnD4ShknpGn", "Su7l9n816K3fI1hILnErpWjOBwxfWSUAC7XRvpnZ");
+		
 		login = (Button)findViewById(R.id.login_button);
 		register = (Button)findViewById(R.id.signup_button);
 		user = (EditText)findViewById(R.id.user_field);
