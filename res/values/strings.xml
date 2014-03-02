@@ -11,6 +11,17 @@
     <string name="poc_button">Send to Database!</string>
     <string name="poc_truerb">Public</string>
     <string name="poc_falserb">Private</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">PartyNow</string>
+    <string name="sign_up">Register Now!</string>
+    <string name="log_in">Log In</string>
+    <string name="reg_userstr">Desired Username:</string>
+    <string name="reg_passstr">Password:</string>
+    <string name="reg_namestr">Full Name:</string>
+    <string name="reg_emailstr">Email:</string>
+    <string name="reg_streetstr">Street Address:</string>
+    <string name="reg_citystr">City:</string>
+    <string name="reg_statestr">State:</string>
+    <string name="reg_zipstr">Zip Code:</string>
+    
 
 </resources>

@@ -52,7 +52,7 @@
             android:value="AIzaSyAJp8Q4prfBcZfzVNSmk8jRkXnsXVzU0xE" />
 
         <activity
-            android:name="com.rjrosaledjwisema.partynow.TitleScreen"
+            android:name="com.rjrosaledjwisema.partynow.PostActivity"
             android:label="@string/app_name" >
         </activity>
     </application>

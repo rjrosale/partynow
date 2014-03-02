@@ -27,7 +27,7 @@ import android.widget.RelativeLayout;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-public class TitleScreen extends Activity {
+public class PostActivity extends Activity {
 
 	private EditText event_name, event_address;
 	private Button database_send;
@@ -38,7 +38,7 @@ public class TitleScreen extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_title_screen);
+		setContentView(R.layout.post_event);
 		
 		event_name = (EditText)findViewById(R.id.editname);
 		event_address = (EditText)findViewById(R.id.editaddress);

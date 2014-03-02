@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
 	private void initButtonListeners() {
 		post.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
-				MainActivity.this.startActivity(new Intent(MainActivity.this, TitleScreen.class));
+				MainActivity.this.startActivity(new Intent(MainActivity.this, PostActivity.class));
 			}
 		});
 		

@@ -1,5 +1,17 @@
 package com.rjrosaledjwisema.partynow;
 
-public class RegistrationScreen {
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.Button;
 
+import com.parse.Parse;
+
+public class RegistrationScreen extends Activity{
+	
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.login_screen);
+		
+
+	}
 }

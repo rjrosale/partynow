@@ -1147,40 +1147,44 @@ containing a value of this type.
         public static final int abs__textButton=0x7f050017;
         public static final int abs__title=0x7f05001f;
         public static final int abs__up=0x7f05000f;
-        public static final int action_settings=0x7f050049;
-        public static final int datePicker1=0x7f050043;
+        public static final int action_settings=0x7f05004d;
+        public static final int datePicker1=0x7f05004b;
         public static final int disableHome=0x7f05000d;
         public static final int edit_query=0x7f05002a;
-        public static final int editaddress=0x7f05003c;
-        public static final int editname=0x7f050040;
-        public static final int eventAddressText=0x7f050046;
-        public static final int eventDateText=0x7f050047;
+        public static final int editaddress=0x7f050044;
+        public static final int editname=0x7f050048;
+        public static final int eventAddressText=0x7f05003c;
+        public static final int eventDateText=0x7f05003d;
         public static final int eventListViewGroup=0x7f05003a;
-        public static final int eventNameText=0x7f050045;
-        public static final int eventTimeText=0x7f050048;
+        public static final int eventNameText=0x7f05003b;
+        public static final int eventTimeText=0x7f05003e;
         public static final int findEvent=0x7f050038;
         public static final int homeAsUp=0x7f05000a;
         public static final int hybrid=0x7f050004;
         public static final int listMode=0x7f050006;
+        public static final int login_button=0x7f050041;
         public static final int map=0x7f050039;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
+        public static final int pass_field=0x7f050040;
         public static final int postEvent=0x7f050037;
-        public static final int privaterb=0x7f050044;
-        public static final int publicrb=0x7f05003e;
+        public static final int privaterb=0x7f05004c;
+        public static final int publicrb=0x7f050046;
         public static final int satellite=0x7f050002;
-        public static final int send_database_button=0x7f05003d;
+        public static final int send_database_button=0x7f050045;
         public static final int showCustom=0x7f05000c;
         public static final int showHome=0x7f050009;
         public static final int showTitle=0x7f05000b;
+        public static final int signup_button=0x7f050042;
         public static final int tabMode=0x7f050007;
         public static final int terrain=0x7f050003;
         public static final int textView1=0x7f050036;
-        public static final int textView2=0x7f05003f;
-        public static final int textView3=0x7f05003b;
-        public static final int textView4=0x7f050041;
-        public static final int timePicker1=0x7f050042;
+        public static final int textView2=0x7f050047;
+        public static final int textView3=0x7f050043;
+        public static final int textView4=0x7f050049;
+        public static final int timePicker1=0x7f05004a;
         public static final int useLogo=0x7f050008;
+        public static final int user_field=0x7f05003f;
         public static final int wrap_content=0x7f050005;
     }
     public static final class integer {
@@ -1211,11 +1215,12 @@ containing a value of this type.
         public static final int abs__simple_dropdown_hint=0x7f030014;
         public static final int activity_main=0x7f030015;
         public static final int activity_map=0x7f030016;
-        public static final int activity_title_screen=0x7f030017;
-        public static final int event_view=0x7f030018;
-        public static final int main_menu=0x7f030019;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001a;
-        public static final int sherlock_spinner_item=0x7f03001b;
+        public static final int event_view=0x7f030017;
+        public static final int login_screen=0x7f030018;
+        public static final int post_event=0x7f030019;
+        public static final int registration_screen=0x7f03001a;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001b;
+        public static final int sherlock_spinner_item=0x7f03001c;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;
@@ -1359,6 +1364,7 @@ containing a value of this type.
          */
         public static final int common_signin_button_text_long=0x7f060013;
         public static final int hello_world=0x7f060029;
+        public static final int log_in=0x7f060033;
         public static final int poc_address=0x7f06002b;
         public static final int poc_button=0x7f06002e;
         public static final int poc_date=0x7f06002d;
@@ -1366,6 +1372,15 @@ containing a value of this type.
         public static final int poc_falserb=0x7f060030;
         public static final int poc_time=0x7f06002c;
         public static final int poc_truerb=0x7f06002f;
+        public static final int reg_citystr=0x7f060039;
+        public static final int reg_emailstr=0x7f060037;
+        public static final int reg_namestr=0x7f060036;
+        public static final int reg_passstr=0x7f060035;
+        public static final int reg_statestr=0x7f06003a;
+        public static final int reg_streetstr=0x7f060038;
+        public static final int reg_userstr=0x7f060034;
+        public static final int reg_zipstr=0x7f06003b;
+        public static final int sign_up=0x7f060032;
         public static final int title_activity_main=0x7f060031;
     }
     public static final class style {
