@@ -22,6 +22,11 @@
     <string name="reg_citystr">City:</string>
     <string name="reg_statestr">State:</string>
     <string name="reg_zipstr">Zip Code:</string>
-    
+    <string name="attend_button">Attend this Event!</string>
+    <string name="see_attending">See Attendees</string>
+    <string name="add_review">Add a Comment</string>
+    <string name="edit_profile_button">Edit Profile</string>
+    <string name="save_changes_button">Save Changes</string>
+    <string name="change_profile_picture">Change Profile Picture</string>
 
 </resources>
