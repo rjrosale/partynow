@@ -27,11 +27,11 @@ implements IconPagerAdapter{
         Fragment fragment = new PostActivity();
         switch(position){
         case 0:
-            fragment = new PostActivity();
-            break;
+            return fragment;
         case 1:
             fragment = new MapActivity();
             break;
+        case 2:
         }
         return fragment;
     }
