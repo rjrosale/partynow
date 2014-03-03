@@ -34,7 +34,6 @@ public class LoginScreen extends SherlockActivity {
 		initButtonListeners();
 	}
 
-
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // TODO
@@ -62,6 +61,8 @@ public class LoginScreen extends SherlockActivity {
 									// Hooray! The user is logged in.
 								} else {
 									Toast.makeText(LoginScreen.this, "Login Failed", Toast.LENGTH_SHORT).show();
+									Intent intent = new Intent(LoginScreen.this, Main.class);
+									LoginScreen.this.startActivity(intent);
 									// Signup failed. Look at the ParseException to see what happened.
 								}
 							}
