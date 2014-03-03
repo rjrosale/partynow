@@ -24,14 +24,16 @@ implements IconPagerAdapter{
     public Fragment getItem(int position) 
     {
         // TODO Auto-generated method stub
-        Fragment fragment = new PostActivity();
+        Fragment fragment = null;
         switch(position){
         case 0:
             return fragment;
         case 1:
-            fragment = new MapActivity();
+        	fragment = new PostActivity();
             break;
         case 2:
+        	fragment = new MapActivity();
+        	break;
         }
         return fragment;
     }
