@@ -42,13 +42,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Base64;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemLongClickListener;
 
-public class MapActivity extends FragmentActivity 
+public class MapActivity extends Fragment 
 implements OnMyLocationChangeListener {
 
 	private GoogleMap mMap;
@@ -58,18 +60,21 @@ implements OnMyLocationChangeListener {
 	private EventListAdapter eventAdapter;
 	private ArrayList<Event> listEvents = new ArrayList<Event>();
 	private Marker marker;
+	private View mapView;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, 
+			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		eventAdapter = new EventListAdapter(this, listEvents);
+		mapView = inflater.inflate(R.layout.activity_map, container, false);
+		eventAdapter = new EventListAdapter(getActivity(), listEvents);
 		initLayout();
+		return mapView;
 	}
 	
 	protected void initLayout() {
-		setContentView(R.layout.activity_map);
 		
-		listLayout = (ListView) findViewById(R.id.eventListViewGroup);
+		listLayout = (ListView) mapView.findViewById(R.id.eventListViewGroup);
 		listLayout.setAdapter(eventAdapter);
 		
 //		Bundle intentbundle = this.getIntent().getExtras();
@@ -115,7 +120,7 @@ implements OnMyLocationChangeListener {
 				// TODO Auto-generated method stub
 				String newAddr = listEvents.get(arg2).getAddress();
 				String newName = listEvents.get(arg2).getName();
-				Geocoder geocoder = new Geocoder(MapActivity.this); 
+				Geocoder geocoder = new Geocoder(getActivity()); 
 				try {
 					List<Address> addr = geocoder.getFromLocationName(newAddr, 1);
 					if(addr.size() > 0) {
@@ -140,18 +145,12 @@ implements OnMyLocationChangeListener {
 			}
 		});
 	}
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.map_screen, menu);
-		return true;
-	}
-
+	
 	private void setUpMapIfNeeded() {
 	    // Do a null check to confirm that we have not already instantiated the map.
 		
 	    if (mMap == null) {
-	    	mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+	    	mMap = ((SupportMapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 	
 	        // Check if we were successful in obtaining the map.
 	        if (mMap != null) {
