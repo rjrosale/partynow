@@ -18,7 +18,7 @@ public class Main extends FragmentActivity {
       
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+        setContentView(R.layout.main_layout);
         
         mAdapter = new FragmentAdapter(getSupportFragmentManager());
 

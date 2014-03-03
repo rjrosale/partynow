@@ -73,10 +73,6 @@ implements OnMyLocationChangeListener {
 	}
 	
 	protected void initLayout() {
-<<<<<<< HEAD
-		setContentView(R.layout.find_event);
-=======
->>>>>>> 2f467efa58849dd97e10690806dbf5a355ac04cc
 		
 		listLayout = (ListView) mapView.findViewById(R.id.eventListViewGroup);
 		listLayout.setAdapter(eventAdapter);
