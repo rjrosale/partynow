@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseAnalytics;
@@ -13,10 +14,13 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -27,7 +31,7 @@ import android.widget.RelativeLayout;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-public class PostActivity extends Activity {
+public class PostActivity extends Fragment {
 
 	private EditText event_name, event_address;
 	private Button database_send;
@@ -35,28 +39,23 @@ public class PostActivity extends Activity {
 	DatePicker datepicker;
 	TimePicker timepicker;
 	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, 
+			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.post_event);
+		View inf = inflater.inflate(R.layout.post_event, container, false);
 		
-		event_name = (EditText) findViewById(R.id.editname);
-		event_address = (EditText) findViewById(R.id.editaddress);
-		database_send = (Button) findViewById(R.id.send_database_button);
-		public_rb = (RadioButton) findViewById(R.id.publicrb);
-		private_rb = (RadioButton) findViewById(R.id.privaterb);
-		datepicker = (DatePicker) findViewById(R.id.datePicker1);
-		timepicker = (TimePicker) findViewById(R.id.timePicker1);
+		event_name = (EditText) inf.findViewById(R.id.editname);
+		event_address = (EditText) inf.findViewById(R.id.editaddress);
+		database_send = (Button) inf.findViewById(R.id.send_database_button);
+		public_rb = (RadioButton) inf.findViewById(R.id.publicrb);
+		private_rb = (RadioButton) inf.findViewById(R.id.privaterb);
+		datepicker = (DatePicker) inf.findViewById(R.id.datePicker1);
+		timepicker = (TimePicker) inf.findViewById(R.id.timePicker1);
 		initButtonListener();
+		
+		return inf;
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.title_screen, menu);
-		return true;
-	}
-	
 	private void initButtonListener() {
 		database_send.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
@@ -79,9 +78,9 @@ public class PostActivity extends Activity {
 						eventDetails.put("pub_priv", false);
 					eventDetails.saveInBackground();
 					
-					Toast.makeText(getBaseContext(), "Uploaded to database!", Toast.LENGTH_SHORT).show(); 
+					Toast.makeText(getActivity(), "Uploaded to database!", Toast.LENGTH_SHORT).show(); 
 				} else {
-					Toast.makeText(getBaseContext(), "Fill in all fields!!", Toast.LENGTH_SHORT).show(); 
+					Toast.makeText(getActivity(), "Fill in all fields!!", Toast.LENGTH_SHORT).show(); 
 				}
 //				addr = event_address.getText().toString();
 //				name = event_name.getText().toString();

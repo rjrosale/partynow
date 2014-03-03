@@ -18,8 +18,6 @@ import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
-
-
 public class LoginScreen extends SherlockActivity {
 	private Button login, register; 
 	private EditText user, pass;
