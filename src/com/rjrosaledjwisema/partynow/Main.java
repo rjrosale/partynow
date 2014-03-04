@@ -3,16 +3,22 @@ package com.rjrosaledjwisema.partynow;
 import com.viewpagerindicator.PageIndicator;
 import com.viewpagerindicator.TitlePageIndicator;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rjrosaledjwisema.partynow.R;
 
@@ -21,14 +27,12 @@ public class Main extends FragmentActivity {
 	private String[] drawerListViewItems;
     private DrawerLayout drawerLayout;
     private ListView drawerListView;
-    private ActionBarDrawerToggle actionBarDrawerToggle;
-    
-    FragmentAdapter mAdapter;
-    ViewPager mPager;
-    PageIndicator mIndicator;
-    int Number = 0;
+    private ActionBarDrawerToggle actionBarDrawerToggle; 
+    private FragmentAdapter mAdapter;
+    private ViewPager mPager;
+    private PageIndicator mIndicator;
+    private int Number = 0;
 
-      
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
@@ -60,12 +64,33 @@ public class Main extends FragmentActivity {
         
         mAdapter = new FragmentAdapter(getSupportFragmentManager());
 
-        mPager = (ViewPager)findViewById(R.id.pager);
+        mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(mAdapter);
 
-        mIndicator = (TitlePageIndicator)findViewById(R.id.indicator);
+        mIndicator = (TitlePageIndicator) findViewById(R.id.indicator);
         mIndicator.setViewPager(mPager);
         
+        drawerListView.setOnItemClickListener(new DrawerItemClickListener());
+    }
+    
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			Intent intent;
+			// TODO Auto-generated method stub
+			Toast.makeText(Main.this, ((TextView) arg1).getText(), Toast.LENGTH_LONG).show();
+			if ("Home".equals(((TextView) arg1).getText())) {
+				
+            } else if ("Profile".equals(((TextView) arg1).getText())) {
+            	intent = new Intent(Main.this, MyProfile.class);
+				Main.this.startActivity(intent);
+            } else if ("Freinds".equals(((TextView) arg1).getText())) {
+            	intent = new Intent(Main.this, Friends.class);
+				Main.this.startActivity(intent);
+            }
+            drawerLayout.closeDrawer(drawerListView);
+		}
     }
     
     @Override
@@ -85,6 +110,4 @@ public class Main extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
  
-    
-    
 }
