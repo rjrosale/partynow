@@ -1,44 +1,25 @@
 package com.rjrosaledjwisema.partynow;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 public class EventsPostedActivity extends SherlockFragmentActivity {
-	private GoogleMap mMap;
-	private LatLng myLocation;
-	private String address = null, name = null;
 	private ListView listLayout;
 	private EventListAdapter eventAdapter;
 	private ArrayList<Event> listEvents = new ArrayList<Event>();
-	private Marker marker;
 	private View listView;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -75,7 +56,6 @@ public class EventsPostedActivity extends SherlockFragmentActivity {
 		        		String event_time = "" + obj.getInt("event_hour") + ":" + obj.getInt("event_minute");
 		        		Event event = new Event(event_name, event_address, event_time, event_date);
 		        		event.setObjectId(obj.getObjectId());
-		        		// Make these work with the listview!
 		        		listEvents.add(event);
 		        		eventAdapter.notifyDataSetChanged();
 		        	}
