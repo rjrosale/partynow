@@ -87,31 +87,11 @@ implements OnMyLocationChangeListener {
 		return mapView;
 	}
 	
-//	public void onDestroyView() {
-//	    super.onDestroyView();
-//	    FragmentManager fm = getActivity().getSupportFragmentManager();
-//	    Fragment fragment = fm.findFragmentById(R.id.map);
-//	    FragmentTransaction ft = fm.beginTransaction();
-//	    if (fragment != null) {
-//	    	ft.remove(fragment);
-//	    	ft.commit();
-//	    }
-//	}
-	
 	protected void initLayout() {
 		
 		listLayout = (ListView) mapView.findViewById(R.id.eventListViewGroup);
 		listLayout.setAdapter(eventAdapter);
 		
-//		Bundle intentbundle = this.getIntent().getExtras();
-//		if(intentbundle != null) {
-//			String addr = intentbundle.getString("address");
-//			String name = intentbundle.getString("name");
-//			if(addr != null && name != null) {
-//				this.address = addr;
-//				this.name = name;
-//			}
-//		}
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("EventDetails");
 		query.findInBackground(new FindCallback<ParseObject>() {
 		    public void done(List<ParseObject> objects, ParseException e) {
