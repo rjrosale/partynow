@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -81,11 +82,16 @@ public class Main extends FragmentActivity {
 			// TODO Auto-generated method stub
 			Toast.makeText(Main.this, ((TextView) arg1).getText(), Toast.LENGTH_LONG).show();
 			if ("Home".equals(((TextView) arg1).getText())) {
-				
+				intent = getIntent();
+				overridePendingTransition(0, 0);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+				finish();
+				overridePendingTransition(0, 0);
+				startActivity(intent);
             } else if ("Profile".equals(((TextView) arg1).getText())) {
             	intent = new Intent(Main.this, MyProfile.class);
 				Main.this.startActivity(intent);
-            } else if ("Freinds".equals(((TextView) arg1).getText())) {
+            } else if ("Friends".equals(((TextView) arg1).getText())) {
             	intent = new Intent(Main.this, Friends.class);
 				Main.this.startActivity(intent);
             }

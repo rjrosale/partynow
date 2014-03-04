@@ -30,6 +30,8 @@
     <string name="change_profile_picture">Change Profile Picture</string>
     <string-array name="items">
         <item>Home</item>
+        <item>Profile</item>
+        <item>Friends</item>
         <item>Settings</item>
     </string-array>
  

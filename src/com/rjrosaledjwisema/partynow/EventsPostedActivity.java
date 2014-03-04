@@ -3,6 +3,7 @@ package com.rjrosaledjwisema.partynow;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,7 +30,12 @@ public class EventsPostedActivity extends SherlockFragmentActivity {
 		eventAdapter = new EventListAdapter(this, listEvents);
 		initLayout();
 		return listView;
+		
 	}
+	
+//	@Override
+//	public void onCreate(Bundle savedInstanceState) {
+//		super.onCreate(savedInstanceState);
 	
 //	public void onDestroyView() {
 //	    super.onDestroyView();

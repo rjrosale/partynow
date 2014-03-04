@@ -44,6 +44,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Base64;
 import android.util.Log;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -68,20 +69,33 @@ implements OnMyLocationChangeListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, 
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mapView = inflater.inflate(R.layout.activity_map, container, false);
+		if (mapView != null) {
+		    ViewGroup parent = (ViewGroup) mapView.getParent();
+		    if (parent != null)
+		        parent.removeView(mapView);
+		}
+		try {
+		    mapView = inflater.inflate(R.layout.activity_map, container, false);
+		} catch (InflateException e) {
+		    /* map is already there, just return view as it is */
+			return mapView;
+		}
+//		mapView = inflater.inflate(R.layout.activity_map, container, false);
 		eventAdapter = new EventListAdapter(getActivity(), listEvents);
 		initLayout();
 		return mapView;
 	}
 	
-	public void onDestroyView() {
-	    super.onDestroyView();
-	    FragmentManager fm = getActivity().getSupportFragmentManager();
-	    Fragment fragment = (fm.findFragmentById(R.id.map));
-	    FragmentTransaction ft = fm.beginTransaction();
-	    ft.remove(fragment);
-	    ft.commit();
-	}
+//	public void onDestroyView() {
+//	    super.onDestroyView();
+//	    FragmentManager fm = getActivity().getSupportFragmentManager();
+//	    Fragment fragment = fm.findFragmentById(R.id.map);
+//	    FragmentTransaction ft = fm.beginTransaction();
+//	    if (fragment != null) {
+//	    	ft.remove(fragment);
+//	    	ft.commit();
+//	    }
+//	}
 	
 	protected void initLayout() {
 		
@@ -163,7 +177,7 @@ implements OnMyLocationChangeListener {
 		
 		
 	    if (mMap == null) {
-	    	mMap = ((SupportMapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+	    	mMap = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 	
 	        // Check if we were successful in obtaining the map.
 	        if (mMap != null) {
