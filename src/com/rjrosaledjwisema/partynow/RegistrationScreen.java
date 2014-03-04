@@ -67,7 +67,7 @@ public class RegistrationScreen extends SherlockActivity{
 									if (e == null) {
 										// Hooray! Let them use the app now.
 										Toast.makeText(RegistrationScreen.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-										RegistrationScreen.this.startActivity(new Intent(RegistrationScreen.this, MainActivity.class));
+										RegistrationScreen.this.startActivity(new Intent(RegistrationScreen.this, Main.class));
 									} else {
 										// Sign up didn't succeed. Look at the ParseException
 										// to figure out what went wrong

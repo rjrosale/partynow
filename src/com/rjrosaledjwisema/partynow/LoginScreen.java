@@ -56,7 +56,7 @@ public class LoginScreen extends SherlockActivity {
 							public void done(ParseUser user, ParseException e) {
 								if (user != null) {
 									Toast.makeText(LoginScreen.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-									Intent intent = new Intent(LoginScreen.this, MainActivity.class);
+									Intent intent = new Intent(LoginScreen.this, Main.class);
 									LoginScreen.this.startActivity(intent);
 									// Hooray! The user is logged in.
 								} else {

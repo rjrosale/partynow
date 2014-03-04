@@ -74,8 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView4"
-            android:ems="10"
-            android:inputType="textEmailAddress" />
+            android:ems="10" />
 
         <TextView
             android:id="@+id/textView5"
