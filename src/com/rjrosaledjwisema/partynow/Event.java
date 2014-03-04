@@ -5,6 +5,7 @@ public class Event {
 	private String eventAddress;
 	private String eventTime;
 	private String eventDate;
+	private String objectId;
 	
 	public Event(String eventName, String eventAddress, String eventTime, String eventDate) {
 		this.eventName = eventName;
@@ -43,5 +44,13 @@ public class Event {
 	
 	public void setDate(String date) {
 		this.eventDate = date;
+	}
+	
+	public String getObjectId() {
+		return this.objectId;
+	}
+	
+	public void setObjectId(String id) {
+		this.objectId = id;
 	}
 }

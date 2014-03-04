@@ -9,6 +9,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseAnalytics;
+import com.parse.ParseUser;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -71,7 +72,7 @@ public class PostActivity extends Fragment {
 					eventDetails.put("event_hour", ((Integer)(timepicker.getCurrentHour())).intValue());
 					eventDetails.put("event_minute", ((Integer)(timepicker.getCurrentMinute())).intValue());
 					eventDetails.put("event_date", datestr);
-					
+					eventDetails.put("event_poster", ParseUser.getCurrentUser().getUsername());
 					if (public_rb.isChecked())
 						eventDetails.put("pub_priv", true);
 					else
