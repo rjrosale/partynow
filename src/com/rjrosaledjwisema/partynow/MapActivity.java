@@ -40,6 +40,8 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -70,6 +72,15 @@ implements OnMyLocationChangeListener {
 		eventAdapter = new EventListAdapter(getActivity(), listEvents);
 		initLayout();
 		return mapView;
+	}
+	
+	public void onDestroyView() {
+	    super.onDestroyView();
+	    FragmentManager fm = getActivity().getSupportFragmentManager();
+	    Fragment fragment = (fm.findFragmentById(R.id.map));
+	    FragmentTransaction ft = fm.beginTransaction();
+	    ft.remove(fragment);
+	    ft.commit();
 	}
 	
 	protected void initLayout() {
@@ -148,6 +159,8 @@ implements OnMyLocationChangeListener {
 	
 	private void setUpMapIfNeeded() {
 	    // Do a null check to confirm that we have not already instantiated the map.
+		
+		
 		
 	    if (mMap == null) {
 	    	mMap = ((SupportMapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
