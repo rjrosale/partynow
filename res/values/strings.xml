@@ -28,11 +28,19 @@
     <string name="edit_profile_button">Edit Profile</string>
     <string name="save_changes_button">Save Changes</string>
     <string name="change_profile_picture">Change Profile Picture</string>
+	<string name="party_preferences">Party Preferences</string>
+	<string name="party_preferences_time">Show only parties after:</string>
+	<string name="party_preferences_proximity">Proximity Detection:</string>
     <string-array name="items">
         <item>Home</item>
+        <item>Profile</item>
+        <item>Friends</item>
         <item>Settings</item>
     </string-array>
- 
+
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="title_activity_my_profile">MyProfile</string>
+    <string name="title_activity_friends">Friends</string>
+
 </resources>
