@@ -40,6 +40,12 @@
         <activity
             android:name="com.rjrosaledjwisema.partynow.RegistrationScreen"
             android:label="@string/app_name" />
+        <activity
+            android:name="com.rjrosaledjwisema.partynow.EventsPostedActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.rjrosaledjwisema.partynow.EventsAttendingActivity"
+            android:label="@string/app_name" />
          <activity
             android:name="com.rjrosaledjwisema.partynow.Main"
             android:label="@string/app_name" >        

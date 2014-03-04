@@ -1480,7 +1480,7 @@ containing a value of this type.
         public static final int abs__textButton=0x7f05001b;
         public static final int abs__title=0x7f050023;
         public static final int abs__up=0x7f05000f;
-        public static final int action_settings=0x7f05007d;
+        public static final int action_settings=0x7f050083;
         public static final int bottom=0x7f050016;
         public static final int content_frame=0x7f050040;
         public static final int datePicker1=0x7f05005e;
@@ -1523,6 +1523,7 @@ containing a value of this type.
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int pager=0x7f050055;
+        public static final int party_time=0x7f05007f;
         public static final int pass_field=0x7f050051;
         public static final int postEvent=0x7f05003b;
         public static final int privaterb=0x7f05005f;
@@ -1541,14 +1542,19 @@ containing a value of this type.
         public static final int profile_my_fullname=0x7f050062;
         public static final int profile_my_picture=0x7f05006b;
         public static final int profile_my_username=0x7f05006c;
+        public static final int proximity_distance=0x7f050081;
         public static final int publicrb=0x7f050059;
         public static final int register_button=0x7f05007c;
         public static final int satellite=0x7f050002;
         public static final int send_database_button=0x7f050058;
+        public static final int settings_proximity=0x7f050080;
+        public static final int settings_time=0x7f05007e;
+        public static final int settings_title=0x7f05007d;
         public static final int showCustom=0x7f05000c;
         public static final int showHome=0x7f050009;
         public static final int showTitle=0x7f05000b;
         public static final int signup_button=0x7f050053;
+        public static final int submit_button=0x7f050082;
         public static final int tabMode=0x7f050007;
         public static final int terrain=0x7f050003;
         public static final int textView1=0x7f05003a;
@@ -1617,8 +1623,9 @@ containing a value of this type.
         public static final int profile_friend=0x7f030024;
         public static final int profile_my=0x7f030025;
         public static final int registration_screen=0x7f030026;
-        public static final int sherlock_spinner_dropdown_item=0x7f030027;
-        public static final int sherlock_spinner_item=0x7f030028;
+        public static final int settings_layout=0x7f030027;
+        public static final int sherlock_spinner_dropdown_item=0x7f030028;
+        public static final int sherlock_spinner_item=0x7f030029;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
@@ -1764,11 +1771,14 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f060013;
-        public static final int drawer_close=0x7f060043;
-        public static final int drawer_open=0x7f060042;
+        public static final int drawer_close=0x7f060046;
+        public static final int drawer_open=0x7f060045;
         public static final int edit_profile_button=0x7f06003f;
         public static final int hello_world=0x7f060029;
         public static final int log_in=0x7f060033;
+        public static final int party_preferences=0x7f060042;
+        public static final int party_preferences_proximity=0x7f060044;
+        public static final int party_preferences_time=0x7f060043;
         public static final int poc_address=0x7f06002b;
         public static final int poc_button=0x7f06002e;
         public static final int poc_date=0x7f06002d;
@@ -1787,7 +1797,9 @@ containing a value of this type.
         public static final int save_changes_button=0x7f060040;
         public static final int see_attending=0x7f06003d;
         public static final int sign_up=0x7f060032;
+        public static final int title_activity_friends=0x7f060048;
         public static final int title_activity_main=0x7f060031;
+        public static final int title_activity_my_profile=0x7f060047;
     }
     public static final class style {
         /** 

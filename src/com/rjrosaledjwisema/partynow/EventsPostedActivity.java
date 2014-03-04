@@ -11,65 +11,60 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
-public class EventsPostedActivity extends SherlockFragmentActivity {
+public class EventsPostedActivity extends SherlockActivity {
 	private ListView listLayout;
 	private EventListAdapter eventAdapter;
 	private ArrayList<Event> listEvents = new ArrayList<Event>();
 	private View listView;
-	
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, 
-			Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		listView = inflater.inflate(R.layout.events_posted, container, false);
-		eventAdapter = new EventListAdapter(this, listEvents);
-		initLayout();
-		return listView;
-		
-	}
-	
-//	@Override
-//	public void onCreate(Bundle savedInstanceState) {
-//		super.onCreate(savedInstanceState);
-	
-//	public void onDestroyView() {
-//	    super.onDestroyView();
-//	    FragmentManager fm = getActivity().getSupportFragmentManager();
-//	    Fragment fragment = (fm.findFragmentById(R.id.map));
-//	    FragmentTransaction ft = fm.beginTransaction();
-//	    ft.remove(fragment);
-//	    ft.commit();
-//	}
-	
-	protected void initLayout() {
-		
-		listLayout = (ListView) listView.findViewById(R.id.events_posted_listview);
-		listLayout.setAdapter(eventAdapter);
 
+
+		@Override
+		public void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			setContentView(R.layout.events_posted);
+			eventAdapter = new EventListAdapter(this, listEvents);
+			initLayout();
+		}
+
+
+	protected void initLayout() {
+
+		listLayout = (ListView)findViewById(R.id.events_posted_listview);
+		listLayout.setAdapter(eventAdapter);
+		Log.d("lFDSJFOSJFPDSFPDS", "I got here one");
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("EventDetails");
+		Log.d("lFDSJFOSJFPDSFPDS", "QUERY NOW");
 		query.findInBackground(new FindCallback<ParseObject>() {
-		    public void done(List<ParseObject> objects, ParseException e) {
-		        if (e == null) {
-		        	for (ParseObject obj : objects) {
-		        		String event_name = obj.getString("event_name");
-		        		String event_address = obj.getString("event_address");
-		        		String event_date = obj.getString("event_date");
-		        		String event_time = "" + obj.getInt("event_hour") + ":" + obj.getInt("event_minute");
-		        		Event event = new Event(event_name, event_address, event_time, event_date);
-		        		event.setObjectId(obj.getObjectId());
-		        		listEvents.add(event);
-		        		eventAdapter.notifyDataSetChanged();
-		        	}
-//		        	initLayoutListener();
-		        } else {
-		            Log.d("score", "Error: " + e.getMessage());
-		        }
-		    }
+			public void done(List<ParseObject> objects, ParseException e) {
+				if (e == null) {
+					Log.d("lFDSJFOSJFPDSFPDS", "E == NULL IT'S FINE");
+					for (ParseObject obj : objects) {
+						Log.d("lFDSJFOSJFPDSFPDS", obj.getString("event_poster") + " vs " + ParseUser.getCurrentUser().getUsername());
+						if (obj.getString("event_poster").equals(ParseUser.getCurrentUser().getUsername())) {
+							String event_name = obj.getString("event_name");
+							String event_address = obj.getString("event_address");
+							String event_date = obj.getString("event_date");
+							String event_time = "" + obj.getInt("event_hour") + ":" + obj.getInt("event_minute");
+							Event event = new Event(event_name, event_address, event_time, event_date);
+							event.setObjectId(obj.getObjectId());
+							listEvents.add(event);
+							Log.d("lFDSJFOSJFPDSFPDS", "ADDED TO LIST VIEW");
+							eventAdapter.notifyDataSetChanged();
+						}
+					}
+					//		        	initLayoutListener();
+				} else {
+					Log.d("lFDSJFOSJFPDSFPDS", "ERROR ERROR ERROR");
+				}
+			}
 
 		});
 	}

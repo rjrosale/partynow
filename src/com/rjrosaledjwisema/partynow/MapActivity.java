@@ -78,6 +78,7 @@ implements OnMyLocationChangeListener {
 		    mapView = inflater.inflate(R.layout.activity_map, container, false);
 		} catch (InflateException e) {
 		    /* map is already there, just return view as it is */
+			initLayout();
 			return mapView;
 		}
 //		mapView = inflater.inflate(R.layout.activity_map, container, false);

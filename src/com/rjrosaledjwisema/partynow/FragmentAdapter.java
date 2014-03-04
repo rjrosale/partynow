@@ -27,7 +27,7 @@ implements IconPagerAdapter{
         Fragment fragment = null;
         switch(position){
         case 0:
-        	fragment = new PostActivity();
+        	fragment = new HomeScreen();
             break;
         case 1:
         	fragment = new PostActivity();
