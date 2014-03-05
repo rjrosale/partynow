@@ -1,19 +1,25 @@
 package com.rjrosaledjwisema.partynow;
 
-<<<<<<< HEAD
-import android.content.Intent;
-=======
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
->>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -31,34 +37,49 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-public class EventDetails extends SherlockActivity {
-<<<<<<< HEAD
-	private TextView eventname, username, eventaddr, eventdate, eventtime;
-	private Button attendEvent, seeAttendees, viewHostProfile;
-	private ParseUser user;
-	private String eventID, otherUser;
-	private Bundle bundle;
-=======
+public class EventDetails extends Activity {
 	private TextView eventName, hostName, eventAddress, eventDate, eventTime;
 	private Button attend, seeAttendees;
->>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 
+	private String[] drawerListViewItems;
+    private DrawerLayout drawerLayout;
+    private ListView drawerListView;
+    private ActionBarDrawerToggle actionBarDrawerToggle; 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.event_details);
-<<<<<<< HEAD
-		bundle = this.getIntent().getExtras();
-		username = (TextView)findViewById(R.id.event_details_hostNameText);
-		eventname = (TextView)findViewById(R.id.event_details_eventNameText);
-		eventaddr = (TextView)findViewById(R.id.event_details_eventAddressText);
-		eventdate = (TextView)findViewById(R.id.event_details_eventDateText);
-		eventtime = (TextView)findViewById(R.id.event_details_eventTimeText);
-		attendEvent = (Button)findViewById(R.id.event_details_attendButton);
-		seeAttendees = (Button)findViewById(R.id.event_details_viewAttendees);
-		viewHostProfile = (Button)findViewById(R.id.event_details_viewHostProfile);
-=======
 
+		// get list items from strings.xml
+        drawerListViewItems = getResources().getStringArray(R.array.items);
+       
+        // get ListView defined in activity_main.xml
+        drawerListView = (ListView) findViewById(R.id.left_drawer);
+     
+        
+        // Set the adapter for the list view
+        drawerListView.setAdapter(new ArrayAdapter<String>(this,
+                R.layout.drawer_listitem, drawerListViewItems));
+ 
+        // App Icon 
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+ 
+        actionBarDrawerToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                drawerLayout,         /* DrawerLayout object */
+                R.drawable.ic_launcher,  /* nav drawer icon to replace 'Up' caret */
+                R.string.drawer_open,  /* "open drawer" description */
+                R.string.drawer_close  /* "close drawer" description */
+                );
+ 
+        // Set actionBarDrawerToggle as the DrawerListener
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+ 
+        getActionBar().setDisplayHomeAsUpEnabled(true); 
+		
+        drawerListView.setOnItemClickListener(new DrawerItemClickListener());
+		
 		eventName = (TextView)findViewById(R.id.event_details_eventNameText);
 		
 		 Bundle intentbundle = this.getIntent().getExtras();
@@ -76,51 +97,10 @@ public class EventDetails extends SherlockActivity {
 		attend = (Button)findViewById(R.id.event_details_attendButton);
 		seeAttendees = (Button)findViewById(R.id.event_details_viewAttendees);
 
->>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 		initLayout();
 	}
 
 	private void initLayout() {
-<<<<<<< HEAD
-		user = ParseUser.getCurrentUser();
-		if (bundle != null) {
-			username.setText(bundle.getString("eventhost"));
-			eventname.setText(bundle.getString("eventname"));
-			eventaddr.setText(bundle.getString("eventaddress"));
-			eventtime.setText(bundle.getString("eventtime"));
-			eventdate.setText(bundle.getString("eventdate"));
-			eventID = bundle.getString("objectID");
-			otherUser = bundle.getString("eventhost");
-		}
-		attendEvent.setOnClickListener(new OnClickListener() {
-			public void onClick(View view) {
-				user.add("events_attending", eventID);
-				user.saveInBackground();
-				Toast.makeText(EventDetails.this, "You are attending event # " + eventID, Toast.LENGTH_SHORT).show();
-			}
-		});
-		seeAttendees.setOnClickListener(new OnClickListener() {
-			public void onClick(View view) {
-				
-			}
-		});
-		viewHostProfile.setOnClickListener(new OnClickListener() {
-			public void onClick(View view) {
-				Intent i = new Intent(EventDetails.this, OtherProfile.class);
-				i.putExtra("username", otherUser);
-				startActivity(i);
-			}
-		});
-	}
-
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO
-		MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.main, menu);
-
-		return true;
-	}
-=======
 		
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("EventDetails");
 		query.findInBackground(new FindCallback<ParseObject>() {
@@ -151,5 +131,44 @@ public class EventDetails extends SherlockActivity {
 			}
 		});
 	}
->>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
+	
+	private class DrawerItemClickListener implements ListView.OnItemClickListener {
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			Intent intent;
+			// TODO Auto-generated method stub
+			if ("Home".equals(((TextView) arg1).getText())) {
+				intent = new Intent(EventDetails.this, Main.class);
+				EventDetails.this.startActivity(intent);
+            }  else if ("Profile".equals(((TextView) arg1).getText())) {
+            	intent = new Intent(EventDetails.this, MyProfile.class);
+            	EventDetails.this.startActivity(intent);
+            } else if ("Friends".equals(((TextView) arg1).getText())) {
+            	intent = new Intent(EventDetails.this, Friends.class);
+				EventDetails.this.startActivity(intent);
+            } else if ("Settings".equals(((TextView) arg1).getText())) {
+            	intent = new Intent(EventDetails.this, Settings.class);
+				EventDetails.this.startActivity(intent);
+            }
+            drawerLayout.closeDrawer(drawerListView);
+		}
+    }
+    
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        actionBarDrawerToggle.onConfigurationChanged(newConfig);
+    }
+ 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+ 
+         // call ActionBarDrawerToggle.onOptionsItemSelected(), if it returns true
+        // then it has handled the app icon touch event
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
