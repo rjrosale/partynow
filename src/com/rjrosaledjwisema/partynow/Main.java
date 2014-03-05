@@ -113,7 +113,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 				long arg3) {
 			Intent intent;
 			// TODO Auto-generated method stub
-			if ("Home".equals(((TextView) arg1).getText())) {
+			/*if ("Home".equals(((TextView) arg1).getText())) {
 				intent = getIntent();
 				intent.putExtra("userID", userID);
 				overridePendingTransition(0, 0);
@@ -121,7 +121,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 				finish();
 				overridePendingTransition(0, 0);
 				startActivity(intent);
-            } else if ("Profile".equals(((TextView) arg1).getText())) {
+            }*/ if ("Profile".equals(((TextView) arg1).getText())) {
             	intent = new Intent(Main.this, MyProfile.class);
             	intent.putExtra("userID", userID);
 				Main.this.startActivity(intent);

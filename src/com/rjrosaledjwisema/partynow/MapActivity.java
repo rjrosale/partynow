@@ -39,6 +39,7 @@ import android.provider.SyncStateContract.Constants;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -97,7 +98,6 @@ implements OnMyLocationChangeListener {
 		eventAdapter = new EventListAdapter(getActivity(), listEvents);
 		
 		initLayout();
-		initAddEventListeners();
 		return mapView;
 	}
 	
@@ -199,10 +199,20 @@ implements OnMyLocationChangeListener {
 				
 			}
 		});
-	}
-	
-	private void initAddEventListeners() {
 		
+		listLayout.setOnItemLongClickListener(new OnItemLongClickListener() {
+		    // Called when the user long-clicks on someView
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				
+		        Event event = listEvents.get(position);
+		        Intent intent = new Intent(getActivity(), EventDetails.class);
+		        intent.putExtra("eventName", event.getName());
+		        getActivity().startActivity(intent);
+		        return true;
+		  }
+		});
 	}
 	
 	private void setUpMapIfNeeded() {
@@ -224,24 +234,6 @@ implements OnMyLocationChangeListener {
 	    }
 	}
 	
-//	private void pinEventAddress() {
-//		Geocoder geocoder = new Geocoder(this); 
-//    	List<Address> addresses = null;
-//    	
-//    	try {
-//			addresses = geocoder.getFromLocationName(this.address, 1);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//    	if(addresses.size() > 0) {
-//    	    double latitude = addresses.get(0).getLatitude();
-//    	    double longitude = addresses.get(0).getLongitude();
-//    	    marker = mMap.addMarker(new MarkerOptions()
-//            .position(new LatLng(latitude, longitude))
-//            .title(name));
-//    	}
-//	}
 	public void setCurLoc() {
 		currLoc = ((Main) getActivity()).getCurLoc();
 	}

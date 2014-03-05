@@ -72,6 +72,10 @@
             android:label="@string/app_name" >
         </activity>
         <activity
+            android:name="com.rjrosaledjwisema.partynow.EventDetails"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
             android:name="com.rjrosaledjwisema.partynow.LoginScreen"
             android:label="@string/title_activity_main" >
             <intent-filter>

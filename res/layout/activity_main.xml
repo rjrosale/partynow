@@ -12,21 +12,25 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Party Now Vertical Prototype"
+        android:text="PartyNow Alpha"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
-        android:id="@+id/postEvent"
+        android:id="@+id/postedEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:text="Post Event" />
+        android:layout_alignLeft="@+id/attendingEvent"
+        android:layout_below="@+id/attendingEvent"
+        android:layout_marginTop="20dp"
+        android:text="@string/main_posted" />
 
     <Button
-        android:id="@+id/findEvent"
+        android:id="@+id/attendingEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/postEvent"
-        android:text="Find Event" />
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="19dp"
+        android:text="@string/main_attending" />
 
 </RelativeLayout>

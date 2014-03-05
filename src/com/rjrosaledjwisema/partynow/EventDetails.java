@@ -1,6 +1,13 @@
 package com.rjrosaledjwisema.partynow;
 
+import java.io.IOException;
+import java.util.List;
+
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -12,50 +19,72 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 public class EventDetails extends SherlockActivity {
-	private TextView username, fullname, vicinity;
-	private Button addComment, addFriend;
-	private ImageView picture;
-	private ListView listView;
-	private ParseUser user;
+	private TextView eventName, hostName, eventAddress, eventDate, eventTime;
+	private Button attend, seeAttendees;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.event_details);
 
-		username = (TextView)findViewById(R.id.profile_friends_username);
-		fullname = (TextView)findViewById(R.id.profile_friends_fullname);
-		vicinity = (TextView)findViewById(R.id.profile_friends_address);
-		picture = (ImageView)findViewById(R.id.profile_friends_picture);
-		addComment = (Button)findViewById(R.id.profile_friends_addreview);
-		addFriend = (Button)findViewById(R.id.profile_friends_addfriend);
-		listView = (ListView)findViewById(R.id.profile_friends_commentlistview);
+		eventName = (TextView)findViewById(R.id.event_details_eventNameText);
+		
+		 Bundle intentbundle = this.getIntent().getExtras();
+			if(intentbundle != null) {
+				String event = intentbundle.getString("eventName");
+				if(event != null) {
+					eventName.setText(event);
+				}
+			}
+		Log.d("djwisema", "Event name is " + eventName.getText());
+		hostName = (TextView)findViewById(R.id.event_details_hostNameText);
+		eventAddress = (TextView)findViewById(R.id.event_details_eventAddressText);
+		eventDate = (TextView)findViewById(R.id.event_details_eventDateText);
+		eventTime= (TextView)findViewById(R.id.event_details_eventTimeText);
+		attend = (Button)findViewById(R.id.event_details_attendButton);
+		seeAttendees = (Button)findViewById(R.id.event_details_viewAttendees);
 
 		initLayout();
 	}
 
 	private void initLayout() {
-		user = ParseUser.getCurrentUser();
-		username.setText(user.getString("username"));
-		fullname.setText(user.getString("fullName"));
-		vicinity.setText(user.getString("vicinity"));
+		
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("EventDetails");
+		query.findInBackground(new FindCallback<ParseObject>() {
+		    public void done(List<ParseObject> objects, ParseException e) {
+		        if (e == null) {
+		        	for (ParseObject obj : objects) {
+		        		Log.d("djwisema", "Event name is " + obj.getString("event_name"));
+		        		if (eventName.getText().equals(obj.getString("event_name"))) {
+		        			hostName.setText(obj.getString("event_poster"));
+		        			eventAddress.setText(obj.getString("event_address"));
+		        			eventDate.setText(obj.getString("event_date"));
+		        			eventTime.setText(obj.getString("event_hour") + ":" +
+		        					obj.getString("event_minute"));
+		        		}
+		        	}
+		        } else {
+		            Log.d("score", "Error: " + e.getMessage());
+		        }
+		    }
 
-
-		addFriend.setOnClickListener(new OnClickListener() {
+		});
+		
+		attend.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
-				user.add("friends_list", username);
-				Toast.makeText(EventDetails.this, username + " has been added as a friend.", Toast.LENGTH_SHORT).show();
+				ParseUser.getCurrentUser().put("events_attending", eventName.getText());
+				Toast.makeText(EventDetails.this, "You are now attending " + 
+				eventName.getText(), Toast.LENGTH_SHORT).show();
 			}
 		});
-	}
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO
-		MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.main, menu);
-
-		return true;
 	}
 }

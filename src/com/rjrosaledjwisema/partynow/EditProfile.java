@@ -37,15 +37,6 @@ public class EditProfile extends SherlockActivity {
 		initButtonListeners();
 	}
 	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO
-		MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.main, menu);
-
-		return true;
-	}
-	
 	private void initButtonListeners() {
 		saveChanges.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
@@ -68,7 +59,7 @@ public class EditProfile extends SherlockActivity {
 						// TODO Auto-generated method stub
 						Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
 
-						Intent i = new Intent(EditProfile.this, Main.class);
+						Intent i = new Intent(EditProfile.this, MyProfile.class);
 						startActivity(i);
 						finish();
 					}

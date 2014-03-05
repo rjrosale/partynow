@@ -11,6 +11,7 @@ import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.parse.FindCallback;
@@ -57,13 +58,15 @@ public class MyProfile extends Activity {
 
         // get list items from strings.xml
         drawerListViewItems = getResources().getStringArray(R.array.items);
-        
+        LinkedList<String> items = new LinkedList<String>(Arrays.asList(drawerListViewItems));
+        items.remove(1);
         // get ListView defined in activity_main.xml
         drawerListView = (ListView) findViewById(R.id.left_drawer);
- 
+     
+        
         // Set the adapter for the list view
         drawerListView.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_listitem, drawerListViewItems));
+                R.layout.drawer_listitem, items.toArray(new String[items.size()])));
  
         // App Icon 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -89,20 +92,6 @@ public class MyProfile extends Activity {
 		picture = (ImageView)findViewById(R.id.profile_my_picture);
 		editProfile = (Button)findViewById(R.id.profile_my_editprofile);
 		listView = (ListView)findViewById(R.id.profile_my_commentlistview);
-//		Bundle intentbundle = this.getIntent().getExtras();
-//		if(intentbundle != null) {
-//			String id = intentbundle.getString("userID");
-//			if(id != null) {
-//				userID = id;
-//			}
-//		}
-//		
-//		editProfile = (Button) findViewById(R.id.profile_my_editprofile);
-//		userName = (TextView) findViewById(R.id.profile_my_username);
-//		fullName = (TextView) findViewById(R.id.profile_my_fullname);
-//		address = (TextView) findViewById(R.id.profile_my_address);
-//		
-//		initButtonListeners();
 		initLayout();
 	}
 
@@ -158,44 +147,4 @@ public class MyProfile extends Activity {
 			}
 		});
 	}
-
-//	private void initLayout() {
-//		if (userID != null) {
-//			ParseUser currentUser = ParseUser.getCurrentUser();
-//			if (currentUser != null) {
-//			  username = currentUser.getString("userName");
-//			} else {
-//			  
-//			}
-//			if (username != null) {
-//				ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
-//				query.findInBackground(new FindCallback<ParseObject>() {
-//				    public void done(List<ParseObject> objects, ParseException e) {
-//				        if (e == null) {
-//				        	for (ParseObject obj : objects) {
-//				        		if (username.equals(obj.getString("userName"))){
-//					        		userName.setText(obj.getString("userName"));
-//					        		fullName.setText(obj.getString("fullName"));
-//					        		address.setText(obj.getString("Address"));
-//				        		}
-//				        	}
-//				        } else {
-//				        	Toast.makeText(MyProfile.this, "User profile not set up", Toast.LENGTH_SHORT).show();
-//				        }
-//				    }
-//				});
-//			}
-//		}
-//	}
-//	
-//	private void initButtonListeners() {
-//		editProfile.setOnClickListener(new OnClickListener(){
-//			@Override
-//			public void onClick(View arg0) {
-//				// TODO Auto-generated method stub
-//				Intent intent = new Intent(MyProfile.this, EditMyProfile.class);
-//				MyProfile.this.startActivity(intent);
-//			}
-//		});
-//	}
 }

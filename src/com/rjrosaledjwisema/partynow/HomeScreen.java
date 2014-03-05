@@ -26,8 +26,8 @@ public class HomeScreen extends Fragment {
 		super.onCreate(savedInstanceState);
 		View inf = inflater.inflate(R.layout.activity_main, container, false);
 
-		post = (Button)inf.findViewById(R.id.postEvent);
-		find = (Button)inf.findViewById(R.id.findEvent);
+		post = (Button)inf.findViewById(R.id.postedEvent);
+		find = (Button)inf.findViewById(R.id.attendingEvent);
 
 		initButtonListeners();
 		
