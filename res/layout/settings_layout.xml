@@ -35,13 +35,14 @@
 	        android:text="@string/party_preferences_proximity"
 	        android:padding="15dp"
 	        android:textAppearance="?android:attr/textAppearanceMedium" />
-	    
-	     <NumberPicker
-	        android:id="@+id/proximity_distance"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content" 
-	        android:padding="20dp"/>
 
+	    <EditText 
+	        android:id="@+id/proximity"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:hint="@string/party_preferences_proximity_hint"
+	        android:padding="20dp"/>
+	    
 	     <Button
 	         android:id="@+id/submit_button"
 	         android:layout_width="wrap_content"

@@ -47,7 +47,7 @@ public class EventDetails extends SherlockActivity {
 		addFriend.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				user.add("friends_list", username);
-				Toast.makeText(OtherProfile.this, username + " has been added as a friend.", Toast.LENGTH_SHORT).show();
+				Toast.makeText(EventDetails.this, username + " has been added as a friend.", Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

@@ -72,7 +72,6 @@ public class RegistrationScreen extends SherlockActivity{
 									if (e == null) {
 										// Hooray! Let them use the app now.
 										Toast.makeText(RegistrationScreen.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-										
 										ParseUser.logInInBackground(usern, passw, new LogInCallback() {
 											@Override
 											public void done(ParseUser user, ParseException e) {
