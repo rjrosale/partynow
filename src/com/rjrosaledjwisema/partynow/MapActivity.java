@@ -78,8 +78,10 @@ implements OnMyLocationChangeListener {
 		    mapView = inflater.inflate(R.layout.activity_map, container, false);
 		} catch (InflateException e) {
 		    /* map is already there, just return view as it is */
-			initLayout();
-			return mapView;
+			if (mapView != null)
+				return mapView;
+			else
+				mapView = inflater.inflate(R.layout.activity_map, container, false);
 		}
 //		mapView = inflater.inflate(R.layout.activity_map, container, false);
 		eventAdapter = new EventListAdapter(getActivity(), listEvents);
@@ -122,6 +124,7 @@ implements OnMyLocationChangeListener {
 		        		String event_date = obj.getString("event_date");
 		        		String event_time = "" + obj.getInt("event_hour") + ":" + obj.getInt("event_minute");
 		        		Event event = new Event(event_name, event_address, event_time, event_date);
+		        		event.setObjectId(obj.getObjectId());
 		        		// Make these work with the listview!
 		        		listEvents.add(event);
 		        		eventAdapter.notifyDataSetChanged();

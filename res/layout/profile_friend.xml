@@ -13,7 +13,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:layout_weight="0.51"
             android:src="@drawable/ic_launcher" />
 
@@ -49,6 +49,13 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:text="@string/add_review" />
+        
+        <Button
+            android:id="@+id/profile_friends_addfriend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/add_friend" />
 
         <ListView
             android:id="@+id/profile_friends_commentlistview"

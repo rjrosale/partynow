@@ -1,12 +1,6 @@
 package com.rjrosaledjwisema.partynow;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,12 +9,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.Activity;
-import android.content.Intent;
 
-public class MyProfile extends SherlockActivity {
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.parse.ParseUser;
+
+public class OtherProfile extends SherlockActivity {
 	private TextView username, fullname, vicinity;
-	private Button editProfile;
+	private Button addComment, addFriend;
 	private ImageView picture;
 	private ListView listView;
 	private ParseUser user;
@@ -30,12 +27,13 @@ public class MyProfile extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.profile_my);
 
-		username = (TextView)findViewById(R.id.profile_my_username);
-		fullname = (TextView)findViewById(R.id.profile_my_fullname);
-		vicinity = (TextView)findViewById(R.id.profile_my_address);
-		picture = (ImageView)findViewById(R.id.profile_my_picture);
-		editProfile = (Button)findViewById(R.id.profile_my_editprofile);
-		listView = (ListView)findViewById(R.id.profile_my_commentlistview);
+		username = (TextView)findViewById(R.id.profile_friends_username);
+		fullname = (TextView)findViewById(R.id.profile_friends_fullname);
+		vicinity = (TextView)findViewById(R.id.profile_friends_address);
+		picture = (ImageView)findViewById(R.id.profile_friends_picture);
+		addComment = (Button)findViewById(R.id.profile_friends_addreview);
+		addFriend = (Button)findViewById(R.id.profile_friends_addfriend);
+		listView = (ListView)findViewById(R.id.profile_friends_commentlistview);
 
 		initLayout();
 	}
@@ -47,11 +45,10 @@ public class MyProfile extends SherlockActivity {
 		vicinity.setText(user.getString("vicinity"));
 
 
-		editProfile.setOnClickListener(new OnClickListener() {
+		addFriend.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
-				Intent i = new Intent(MyProfile.this, EditProfile.class); 
-				MyProfile.this.startActivity(i);
-				finish();
+				user.add("friends_list", username);
+				Toast.makeText(OtherProfile.this, username + " has been added as a friend.", Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
@@ -62,5 +59,4 @@ public class MyProfile extends SherlockActivity {
 
 		return true;
 	}
-
 }

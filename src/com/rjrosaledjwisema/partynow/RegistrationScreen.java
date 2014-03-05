@@ -1,8 +1,11 @@
 package com.rjrosaledjwisema.partynow;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -21,6 +24,7 @@ import com.parse.SignUpCallback;
 public class RegistrationScreen extends SherlockActivity{
 	private EditText username, email, password, fullname, street, city, state, zip;
 	private Button registerbutton;
+	private String usern, passw;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,11 +35,12 @@ public class RegistrationScreen extends SherlockActivity{
 		email = (EditText)findViewById(R.id.editreg_email);
 		password = (EditText)findViewById(R.id.editreg_pass);
 		fullname = (EditText)findViewById(R.id.editreg_name);
-		street = (EditText)findViewById(R.id.editreg_street);
+//		street = (EditText)findViewById(R.id.editreg_street);
 		city = (EditText)findViewById(R.id.editreg_city);
-		state = (EditText)findViewById(R.id.editreg_state);
-		zip = (EditText)findViewById(R.id.editreg_zip);
+//		state = (EditText)findViewById(R.id.editreg_state);
+//		zip = (EditText)findViewById(R.id.editreg_zip);
 		registerbutton = (Button)findViewById(R.id.register_button);
+		//add phone number here
 		initButtonListeners();
 	}
 
@@ -52,8 +57,8 @@ public class RegistrationScreen extends SherlockActivity{
 		registerbutton.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				ParseUser user = new ParseUser();
-				String usern = username.getText().toString().toLowerCase();
-				String passw = password.getText().toString().toLowerCase();
+				usern = username.getText().toString().toLowerCase();
+				passw = password.getText().toString().toLowerCase();
 				String em = email.getText().toString().toLowerCase();
 				if (usern != null && !usern.isEmpty()) {
 					if (passw != null && !passw.isEmpty()) {
@@ -67,10 +72,25 @@ public class RegistrationScreen extends SherlockActivity{
 									if (e == null) {
 										// Hooray! Let them use the app now.
 										Toast.makeText(RegistrationScreen.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-										RegistrationScreen.this.startActivity(new Intent(RegistrationScreen.this, Main.class));
+										
+										ParseUser.logInInBackground(usern, passw, new LogInCallback() {
+											@Override
+											public void done(ParseUser user, ParseException e) {
+												if (user != null) {
+													Toast.makeText(RegistrationScreen.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+													Intent intent = new Intent(RegistrationScreen.this, EditProfile.class);
+													RegistrationScreen.this.startActivity(intent);
+													// Hooray! The user is logged in.
+												} else {
+													Toast.makeText(RegistrationScreen.this, "Login Failed", Toast.LENGTH_SHORT).show();
+													// Signup failed. Look at the ParseException to see what happened.
+												}
+											}
+										});
 									} else {
 										// Sign up didn't succeed. Look at the ParseException
 										// to figure out what went wrong
+										Toast.makeText(RegistrationScreen.this, "Registration Failed", Toast.LENGTH_SHORT).show();
 									}
 								}
 							});

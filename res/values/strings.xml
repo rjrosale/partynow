@@ -25,6 +25,7 @@
     <string name="attend_button">Attend this Event!</string>
     <string name="see_attending">See Attendees</string>
     <string name="add_review">Add a Comment</string>
+    <string name="add_friend">Add as Friend</string>
     <string name="edit_profile_button">Edit Profile</string>
     <string name="save_changes_button">Save Changes</string>
     <string name="change_profile_picture">Change Profile Picture</string>
