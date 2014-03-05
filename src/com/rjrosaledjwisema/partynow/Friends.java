@@ -1,12 +1,5 @@
 package com.rjrosaledjwisema.partynow;
 
-<<<<<<< HEAD
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-
-import android.os.Bundle;
-=======
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -23,9 +16,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
->>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 
-public class Friends extends SherlockActivity {
+public class Friends extends Activity {
 
 	private String[] drawerListViewItems;
     private DrawerLayout drawerLayout;
@@ -67,14 +59,6 @@ public class Friends extends SherlockActivity {
         drawerListView.setOnItemClickListener(new DrawerItemClickListener());
 	}
 
-<<<<<<< HEAD
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO
-		MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.main, menu);
-		return true;
-	}
-=======
 	private class DrawerItemClickListener implements ListView.OnItemClickListener {
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -111,6 +95,5 @@ public class Friends extends SherlockActivity {
         }
         return super.onOptionsItemSelected(item);
     }
->>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 
 }
