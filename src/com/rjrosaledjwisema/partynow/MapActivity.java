@@ -62,8 +62,9 @@ implements OnMyLocationChangeListener {
 	private ListView listLayout;
 	private EventListAdapter eventAdapter;
 	private ArrayList<Event> listEvents = new ArrayList<Event>();
-	private Marker marker;
+	private ArrayList<Marker> markers;
 	private View mapView;
+	private Location currLoc; 
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -96,6 +97,7 @@ implements OnMyLocationChangeListener {
 		query.findInBackground(new FindCallback<ParseObject>() {
 		    public void done(List<ParseObject> objects, ParseException e) {
 		        if (e == null) {
+		        	mMap.clear();
 		        	for (ParseObject obj : objects) {
 		        		String event_name = obj.getString("event_name");
 		        		String event_address = obj.getString("event_address");
@@ -105,6 +107,31 @@ implements OnMyLocationChangeListener {
 		        		// Make these work with the listview!
 		        		listEvents.add(event);
 		        		eventAdapter.notifyDataSetChanged();
+		        		
+		        		Geocoder geocoder = new Geocoder(getActivity()); 
+						try {
+							List<Address> addr = geocoder.getFromLocationName(event_address, 1);
+							Location party = new Location("Party");
+							
+							if(addr.size() > 0) {
+					    	    double latitude = addr.get(0).getLatitude();
+					    	    double longitude = addr.get(0).getLongitude();
+					    	    
+					    	    party.setLatitude(latitude);
+					    	    party.setLongitude(longitude);
+					    	    
+					    	    Double distance = (double) currLoc.distanceTo(party);
+					    	    Double miles = distance / 1.609344f;
+					    	    if (miles > 50) {
+						    	   mMap.addMarker(new MarkerOptions()
+						            .position(new LatLng(latitude, longitude))
+						            .title(event_name));
+					    	    }
+					    	}
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 		        	}
 		        	initLayoutListener();
 		        } else {
@@ -133,11 +160,6 @@ implements OnMyLocationChangeListener {
 			    	    double latitude = addr.get(0).getLatitude();
 			    	    double longitude = addr.get(0).getLongitude();
 			    	    
-			    	    if (marker != null)
-			    	    	marker.remove();
-			    	    marker = mMap.addMarker(new MarkerOptions()
-			            .position(new LatLng(latitude, longitude))
-			            .title(newName));
 			       	    CameraUpdate myLoc = CameraUpdateFactory.newCameraPosition(
 			    	            new CameraPosition.Builder().target(new LatLng(latitude,
 			    	                   longitude)).zoom(7).build());
@@ -193,12 +215,14 @@ implements OnMyLocationChangeListener {
 	@Override
 	public void onMyLocationChange(Location location) {
 		// TODO Auto-generated method stub
-	
+		currLoc = location;
+		
 		CameraUpdate myLoc = CameraUpdateFactory.newCameraPosition(
 	            new CameraPosition.Builder().target(new LatLng(location.getLatitude(),
 	                   location.getLongitude())).zoom(15).build());
 	    mMap.moveCamera(myLoc);
 	    mMap.setOnMyLocationChangeListener(null);
 	}
+	
 	
 }

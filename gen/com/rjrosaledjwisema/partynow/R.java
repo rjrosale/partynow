@@ -1542,7 +1542,7 @@ containing a value of this type.
         public static final int profile_my_fullname=0x7f040062;
         public static final int profile_my_picture=0x7f04006b;
         public static final int profile_my_username=0x7f04006c;
-        public static final int proximity_distance=0x7f040081;
+        public static final int proximity=0x7f040081;
         public static final int publicrb=0x7f040059;
         public static final int register_button=0x7f04007c;
         public static final int satellite=0x7f040006;
@@ -1773,13 +1773,14 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f0a0013;
-        public static final int drawer_close=0x7f0a0046;
-        public static final int drawer_open=0x7f0a0045;
+        public static final int drawer_close=0x7f0a0047;
+        public static final int drawer_open=0x7f0a0046;
         public static final int edit_profile_button=0x7f0a003f;
         public static final int hello_world=0x7f0a0029;
         public static final int log_in=0x7f0a0033;
         public static final int party_preferences=0x7f0a0042;
         public static final int party_preferences_proximity=0x7f0a0044;
+        public static final int party_preferences_proximity_hint=0x7f0a0045;
         public static final int party_preferences_time=0x7f0a0043;
         public static final int poc_address=0x7f0a002b;
         public static final int poc_button=0x7f0a002e;
@@ -1799,11 +1800,11 @@ containing a value of this type.
         public static final int save_changes_button=0x7f0a0040;
         public static final int see_attending=0x7f0a003d;
         public static final int sign_up=0x7f0a0032;
-        public static final int title_activity_edit_my_profile=0x7f0a004a;
-        public static final int title_activity_friends=0x7f0a0048;
+        public static final int title_activity_edit_my_profile=0x7f0a004b;
+        public static final int title_activity_friends=0x7f0a0049;
         public static final int title_activity_main=0x7f0a0031;
-        public static final int title_activity_my_profile=0x7f0a0047;
-        public static final int title_activity_settings=0x7f0a0049;
+        public static final int title_activity_my_profile=0x7f0a0048;
+        public static final int title_activity_settings=0x7f0a004a;
     }
     public static final class style {
         /** 
