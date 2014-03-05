@@ -16,7 +16,7 @@
             android:layout_marginTop="50dp"
             android:text="Event Name"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-        
+
         <TextView
             android:id="@+id/event_details_hostNameText"
             android:layout_width="wrap_content"
@@ -44,10 +44,18 @@
         <TextView
             android:id="@+id/event_details_eventTimeText"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Event Time"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/event_details_viewHostProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="@string/view_host_profile" />
 
         <Button
             android:id="@+id/event_details_attendButton"
@@ -56,7 +64,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:text="@string/attend_button" />
-        
+
         <Button
             android:id="@+id/event_details_viewAttendees"
             android:layout_width="wrap_content"
@@ -64,7 +72,6 @@
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:text="@string/see_attending" />
-
     </LinearLayout>
 
 </ScrollView>

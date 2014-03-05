@@ -6,12 +6,14 @@ public class Event {
 	private String eventTime;
 	private String eventDate;
 	private String objectId;
+	private String hostName;
 	
-	public Event(String eventName, String eventAddress, String eventTime, String eventDate) {
+	public Event(String eventName, String eventAddress, String eventTime, String eventDate, String hostName) {
 		this.eventName = eventName;
 		this.eventAddress = eventAddress;
 		this.eventTime = eventTime;
 		this.eventDate = eventDate;
+		this.hostName = hostName;
 	}
 	
 	public String getName() {
@@ -52,5 +54,13 @@ public class Event {
 	
 	public void setObjectId(String id) {
 		this.objectId = id;
+	}
+	
+	public String getHostName() {
+		return this.hostName;
+	}
+	
+	public void setHostName(String hostName) {
+		this.hostName = hostName;
 	}
 }

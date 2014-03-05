@@ -21,12 +21,14 @@ public class OtherProfile extends SherlockActivity {
 	private ImageView picture;
 	private ListView listView;
 	private ParseUser user;
-
+	private Bundle bundle;
+	private String otherUser;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.profile_my);
-
+		setContentView(R.layout.profile_friend);
+		
+		bundle = getIntent().getExtras();
 		username = (TextView)findViewById(R.id.profile_friends_username);
 		fullname = (TextView)findViewById(R.id.profile_friends_fullname);
 		vicinity = (TextView)findViewById(R.id.profile_friends_address);
@@ -39,16 +41,18 @@ public class OtherProfile extends SherlockActivity {
 	}
 
 	private void initLayout() {
+		// Need to get a query. Currently only a copy of MyProfile
 		user = ParseUser.getCurrentUser();
-		username.setText(user.getString("username"));
+		username.setText(bundle.getString("username"));
 		fullname.setText(user.getString("fullName"));
 		vicinity.setText(user.getString("vicinity"));
-
-
+		otherUser = bundle.getString("username");
+		// Check otherUser's string name if your list contains it. Or we can use objectID here (pass in from intent)
 		addFriend.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
-				user.add("friends_list", username);
-				Toast.makeText(OtherProfile.this, username + " has been added as a friend.", Toast.LENGTH_SHORT).show();
+				user.add("friends_list", otherUser);
+				user.saveInBackground();
+				Toast.makeText(OtherProfile.this, otherUser + " has been added as a friend.", Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

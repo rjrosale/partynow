@@ -52,15 +52,14 @@ public class EditProfile extends SherlockActivity {
 				name = fullName.getText().toString();
 				phone = phoneNumber.getText().toString();
 				city = vicinity.getText().toString();
-				user.put("fullName", name);
-				user.put("phone_number", phone);
-				user.put("vicinity", city);
+				if (name != null && !name.isEmpty())
+					user.put("fullName", name);
+				if (phone != null && !phone.isEmpty())
+					user.put("phone_number", phone);
+				if (city != null && !city.isEmpty())
+					user.put("vicinity", city);
 				user.add("friends_list", "dan");
 				user.add("events_attending", "objectIDHERE");
-//				user.put("events_attending", new ArrayList<Event>());
-//				Log.d("REGEREGREGEREG", "added arraylistevents to parse");
-//				user.put("friend_list", new ArrayList<String>());
-//				Log.d("REGEREGREGEREG", "added arraylistfriends to parse");
 				user.saveInBackground(new SaveCallback() {
 
 					@Override

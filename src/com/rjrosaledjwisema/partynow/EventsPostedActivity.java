@@ -53,7 +53,7 @@ public class EventsPostedActivity extends SherlockActivity {
 							String event_address = obj.getString("event_address");
 							String event_date = obj.getString("event_date");
 							String event_time = "" + obj.getInt("event_hour") + ":" + obj.getInt("event_minute");
-							Event event = new Event(event_name, event_address, event_time, event_date);
+							Event event = new Event(event_name, event_address, event_time, event_date, ParseUser.getCurrentUser().getUsername());
 							event.setObjectId(obj.getObjectId());
 							listEvents.add(event);
 							Log.d("lFDSJFOSJFPDSFPDS", "ADDED TO LIST VIEW");
