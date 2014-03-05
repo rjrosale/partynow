@@ -34,6 +34,10 @@
     <string name="party_preferences_proximity">Proximity Detection:</string>
     <string name="party_preferences_proximity_hint">Enter distance in miles</string>
     <string name="view_host_profile">View Host Profile</string>
+    <string name="menu_viewevent">View Event</string>
+     <string name="main_posted">Events Posted</string>
+      <string name="main_attending">Events Attending</string>
+
 
     <string-array name="items">
         <item>Home</item>

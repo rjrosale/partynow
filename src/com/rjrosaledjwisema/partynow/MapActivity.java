@@ -75,7 +75,11 @@ implements OnMyLocationChangeListener {
 	private ArrayList<Marker> markers;
 	private View mapView;
 	private Location currLoc;
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, 
 			Bundle savedInstanceState) {
@@ -96,11 +100,19 @@ implements OnMyLocationChangeListener {
 		}*/
 		mapView = inflater.inflate(R.layout.activity_map, container, false);
 		eventAdapter = new EventListAdapter(getActivity(), listEvents);
+<<<<<<< HEAD
 
 		initLayout();
 		return mapView;
 	}
 
+=======
+		
+		initLayout();
+		return mapView;
+	}
+	
+>>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 	public void onDestroyView() {
 	    super.onDestroyView();
 	    FragmentManager fm = getActivity().getSupportFragmentManager();
@@ -109,6 +121,7 @@ implements OnMyLocationChangeListener {
 	    ft.remove(fragment);
 	    ft.commit();
 	}
+<<<<<<< HEAD
 
 	protected void initLayout() {
 
@@ -117,6 +130,16 @@ implements OnMyLocationChangeListener {
 		listLayout.setAdapter(eventAdapter);
 
 
+=======
+	
+	protected void initLayout() {
+		
+		
+		listLayout = (ListView) mapView.findViewById(R.id.eventListViewGroup);
+		listLayout.setAdapter(eventAdapter);
+		
+		
+>>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("EventDetails");
 		query.findInBackground(new FindCallback<ParseObject>() {
 		    public void done(List<ParseObject> objects, ParseException e) {
@@ -145,7 +168,11 @@ implements OnMyLocationChangeListener {
 
 					    	    party.setLatitude(latitude);
 					    	    party.setLongitude(longitude);
+<<<<<<< HEAD
 
+=======
+					    	    
+>>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 					    	    //	setCurLoc();
 					    	    //	Double distance = (double) currLoc.distanceTo(party);
 						    	  //  Double miles = (distance) / 1.609344f;
@@ -154,7 +181,11 @@ implements OnMyLocationChangeListener {
 							            .position(new LatLng(latitude, longitude))
 							            .title(event_name));
 						    	    //}
+<<<<<<< HEAD
 
+=======
+					    	    
+>>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 					    	}
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
@@ -200,13 +231,21 @@ implements OnMyLocationChangeListener {
 
 			}
 		});
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 		listLayout.setOnItemLongClickListener(new OnItemLongClickListener() {
 		    // Called when the user long-clicks on someView
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+<<<<<<< HEAD
 
+=======
+				
+>>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 		        Event event = listEvents.get(position);
 		        Intent intent = new Intent(getActivity(), EventDetails.class);
 		        intent.putExtra("eventName", event.getName());
@@ -234,11 +273,19 @@ implements OnMyLocationChangeListener {
 	        }
 	    }
 	}
+<<<<<<< HEAD
 
 	public void setCurLoc() {
 		currLoc = ((Main) getActivity()).getCurLoc();
 	}
 
+=======
+	
+	public void setCurLoc() {
+		currLoc = ((Main) getActivity()).getCurLoc();
+	}
+	
+>>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 	@Override
 	public void onMyLocationChange(Location location) {
 		// TODO Auto-generated method stub
@@ -250,5 +297,10 @@ implements OnMyLocationChangeListener {
 	    mMap.moveCamera(myLoc);
 	    mMap.setOnMyLocationChangeListener(null);
 	}
+<<<<<<< HEAD
 
 }
+=======
+	
+}
+>>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948

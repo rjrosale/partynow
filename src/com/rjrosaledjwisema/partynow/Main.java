@@ -326,4 +326,8 @@ GooglePlayServicesClient.OnConnectionFailedListener {
         mLocationClient.disconnect();
         super.onStop();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
