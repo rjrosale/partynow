@@ -75,11 +75,7 @@ implements OnMyLocationChangeListener {
 	private ArrayList<Marker> markers;
 	private View mapView;
 	private Location currLoc;
-<<<<<<< HEAD
-
-=======
 	
->>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, 
 			Bundle savedInstanceState) {
@@ -100,19 +96,11 @@ implements OnMyLocationChangeListener {
 		}*/
 		mapView = inflater.inflate(R.layout.activity_map, container, false);
 		eventAdapter = new EventListAdapter(getActivity(), listEvents);
-<<<<<<< HEAD
-
-		initLayout();
-		return mapView;
-	}
-
-=======
 		
 		initLayout();
 		return mapView;
 	}
 	
->>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 	public void onDestroyView() {
 	    super.onDestroyView();
 	    FragmentManager fm = getActivity().getSupportFragmentManager();
@@ -121,16 +109,6 @@ implements OnMyLocationChangeListener {
 	    ft.remove(fragment);
 	    ft.commit();
 	}
-<<<<<<< HEAD
-
-	protected void initLayout() {
-
-
-		listLayout = (ListView) mapView.findViewById(R.id.eventListViewGroup);
-		listLayout.setAdapter(eventAdapter);
-
-
-=======
 	
 	protected void initLayout() {
 		
@@ -139,7 +117,6 @@ implements OnMyLocationChangeListener {
 		listLayout.setAdapter(eventAdapter);
 		
 		
->>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("EventDetails");
 		query.findInBackground(new FindCallback<ParseObject>() {
 		    public void done(List<ParseObject> objects, ParseException e) {
@@ -150,29 +127,24 @@ implements OnMyLocationChangeListener {
 		        		String event_address = obj.getString("event_address");
 		        		String event_date = obj.getString("event_date");
 		        		String event_time = "" + obj.getInt("event_hour") + ":" + obj.getInt("event_minute");
-		        		String event_host = obj.getString("event_poster");
-		        		Event event = new Event(event_name, event_address, event_time, event_date, event_host);
+		        		Event event = new Event(event_name, event_address, event_time, event_date);
 		        		event.setObjectId(obj.getObjectId());
 		        		// Make these work with the listview!
 		        		listEvents.add(event);
 		        		eventAdapter.notifyDataSetChanged();
-
+		        		
 		        		Geocoder geocoder = new Geocoder(getActivity()); 
 						try {
 							List<Address> addr = geocoder.getFromLocationName(event_address, 1);
 							Location party = new Location("Party");
-
+							
 							if(addr.size() > 0) {
 					    	    double latitude = addr.get(0).getLatitude();
 					    	    double longitude = addr.get(0).getLongitude();
-
+					    	    
 					    	    party.setLatitude(latitude);
 					    	    party.setLongitude(longitude);
-<<<<<<< HEAD
-
-=======
 					    	    
->>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 					    	    //	setCurLoc();
 					    	    //	Double distance = (double) currLoc.distanceTo(party);
 						    	  //  Double miles = (distance) / 1.609344f;
@@ -181,11 +153,7 @@ implements OnMyLocationChangeListener {
 							            .position(new LatLng(latitude, longitude))
 							            .title(event_name));
 						    	    //}
-<<<<<<< HEAD
-
-=======
 					    	    
->>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 					    	}
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
@@ -201,7 +169,7 @@ implements OnMyLocationChangeListener {
 		});
 		setUpMapIfNeeded();
 	}
-
+	
 	private void initLayoutListener() {
 		listLayout.setOnItemClickListener(new ListView.OnItemClickListener() {
 		    // Called when the user long-clicks on someView
@@ -218,7 +186,7 @@ implements OnMyLocationChangeListener {
 					if(addr.size() > 0) {
 			    	    double latitude = addr.get(0).getLatitude();
 			    	    double longitude = addr.get(0).getLongitude();
-
+			    	    
 			       	    CameraUpdate myLoc = CameraUpdateFactory.newCameraPosition(
 			    	            new CameraPosition.Builder().target(new LatLng(latitude,
 			    	                   longitude)).zoom(7).build());
@@ -228,24 +196,16 @@ implements OnMyLocationChangeListener {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
+				
 			}
 		});
-<<<<<<< HEAD
-
-=======
 		
->>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 		listLayout.setOnItemLongClickListener(new OnItemLongClickListener() {
 		    // Called when the user long-clicks on someView
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-<<<<<<< HEAD
-
-=======
 				
->>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 		        Event event = listEvents.get(position);
 		        Intent intent = new Intent(getActivity(), EventDetails.class);
 		        intent.putExtra("eventName", event.getName());
@@ -254,15 +214,15 @@ implements OnMyLocationChangeListener {
 		  }
 		});
 	}
-
+	
 	private void setUpMapIfNeeded() {
 	    // Do a null check to confirm that we have not already instantiated the map.
-
-
-
+		
+		
+		
 	    if (mMap == null) {
 	    	mMap = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-
+	
 	        // Check if we were successful in obtaining the map.
 	        if (mMap != null) {
 	            // The Map is verified. It is now safe to manipulate the map.
@@ -273,34 +233,21 @@ implements OnMyLocationChangeListener {
 	        }
 	    }
 	}
-<<<<<<< HEAD
-
-	public void setCurLoc() {
-		currLoc = ((Main) getActivity()).getCurLoc();
-	}
-
-=======
 	
 	public void setCurLoc() {
 		currLoc = ((Main) getActivity()).getCurLoc();
 	}
 	
->>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
 	@Override
 	public void onMyLocationChange(Location location) {
 		// TODO Auto-generated method stub
 		currLoc = location;
-
+		
 		CameraUpdate myLoc = CameraUpdateFactory.newCameraPosition(
 	            new CameraPosition.Builder().target(new LatLng(location.getLatitude(),
 	                   location.getLongitude())).zoom(15).build());
 	    mMap.moveCamera(myLoc);
 	    mMap.setOnMyLocationChangeListener(null);
 	}
-<<<<<<< HEAD
-
-}
-=======
 	
 }
->>>>>>> 17a5d268be47ef88222a510b3a9debcffd4a1948
