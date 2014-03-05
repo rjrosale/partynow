@@ -6,6 +6,11 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.ActionMode.Callback;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,9 +32,13 @@ import com.parse.ParseQuery;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.SyncStateContract.Constants;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -64,13 +73,13 @@ implements OnMyLocationChangeListener {
 	private ArrayList<Event> listEvents = new ArrayList<Event>();
 	private ArrayList<Marker> markers;
 	private View mapView;
-	private Location currLoc; 
+	private Location currLoc;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, 
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (mapView != null) {
+		/*if (mapView != null) {
 		    ViewGroup parent = (ViewGroup) mapView.getParent();
 		    if (parent != null)
 		        parent.removeView(mapView);
@@ -78,22 +87,35 @@ implements OnMyLocationChangeListener {
 		try {
 		    mapView = inflater.inflate(R.layout.activity_map, container, false);
 		} catch (InflateException e) {
-		    /* map is already there, just return view as it is */
+		    /* map is already there, just return view as it is 
 			if (mapView != null)
 				return mapView;
 			else
 				mapView = inflater.inflate(R.layout.activity_map, container, false);
-		}
-//		mapView = inflater.inflate(R.layout.activity_map, container, false);
+		}*/
+		mapView = inflater.inflate(R.layout.activity_map, container, false);
 		eventAdapter = new EventListAdapter(getActivity(), listEvents);
+		
 		initLayout();
+		initAddEventListeners();
 		return mapView;
+	}
+	
+	public void onDestroyView() {
+	    super.onDestroyView();
+	    FragmentManager fm = getActivity().getSupportFragmentManager();
+	    Fragment fragment = (fm.findFragmentById(R.id.map));
+	    FragmentTransaction ft = fm.beginTransaction();
+	    ft.remove(fragment);
+	    ft.commit();
 	}
 	
 	protected void initLayout() {
 		
+		
 		listLayout = (ListView) mapView.findViewById(R.id.eventListViewGroup);
 		listLayout.setAdapter(eventAdapter);
+		
 		
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("EventDetails");
 		query.findInBackground(new FindCallback<ParseObject>() {
@@ -123,13 +145,15 @@ implements OnMyLocationChangeListener {
 					    	    party.setLatitude(latitude);
 					    	    party.setLongitude(longitude);
 					    	    
-					    	    Double distance = (double) currLoc.distanceTo(party);
-					    	    Double miles = distance / 1.609344f;
-					    	    if (miles > 50) {
-						    	   mMap.addMarker(new MarkerOptions()
-						            .position(new LatLng(latitude, longitude))
-						            .title(event_name));
-					    	    }
+					    	    //	setCurLoc();
+					    	    //	Double distance = (double) currLoc.distanceTo(party);
+						    	  //  Double miles = (distance) / 1.609344f;
+						    	   // if (miles > 50) {
+							    	   mMap.addMarker(new MarkerOptions()
+							            .position(new LatLng(latitude, longitude))
+							            .title(event_name));
+						    	    //}
+					    	    
 					    	}
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
@@ -177,6 +201,10 @@ implements OnMyLocationChangeListener {
 		});
 	}
 	
+	private void initAddEventListeners() {
+		
+	}
+	
 	private void setUpMapIfNeeded() {
 	    // Do a null check to confirm that we have not already instantiated the map.
 		
@@ -214,6 +242,9 @@ implements OnMyLocationChangeListener {
 //            .title(name));
 //    	}
 //	}
+	public void setCurLoc() {
+		currLoc = ((Main) getActivity()).getCurLoc();
+	}
 	
 	@Override
 	public void onMyLocationChange(Location location) {
@@ -226,6 +257,5 @@ implements OnMyLocationChangeListener {
 	    mMap.moveCamera(myLoc);
 	    mMap.setOnMyLocationChangeListener(null);
 	}
-	
 	
 }

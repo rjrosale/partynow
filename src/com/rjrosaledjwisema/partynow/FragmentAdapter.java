@@ -2,13 +2,17 @@ package com.rjrosaledjwisema.partynow;
 
 import com.viewpagerindicator.IconPagerAdapter;
 
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class FragmentAdapter extends FragmentStatePagerAdapter 
-implements IconPagerAdapter{
-
+implements IconPagerAdapter {
+	
     public FragmentAdapter(FragmentManager fm) {
         super(fm);
         // TODO Auto-generated constructor stub
@@ -60,5 +64,5 @@ implements IconPagerAdapter{
         }
         return title;
     }
-
+    
 }
